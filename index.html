@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  WEPLACE PRIVATE 72 — 단일 배포 페이지 (익명화 v1)
+  표면: private72.html / private72-v2.html (Stitch 시각 보존)
+  기능: index 구조 이식 (정적 CSS · CONFIG · 카운트다운 · 5문항 진단 ·
+        라이브 결과 · 사례 게이팅 · 폼 검증/전송 · 카카오 fallback · UTM · 이벤트 · 접근성)
+  ------------------------------------------------------------
+  배포 전 교체 placeholder (아래 CONFIG 블록 + canonical):
+    1) CAMPAIGN_END  : 실제 고정 종료 시각(KST). 예) "2026-07-15T23:59:59+09:00"
+    2) FORM_ENDPOINT : 폼 수집 엔드포인트(POST JSON). 없거나 실패하면 카카오 fallback.
+    3) KAKAO_LINK    : 카카오 채널/오픈채팅 URL.
+    4) CANONICAL_URL : 실제 배포 URL (canonical / og:url / og:image / twitter:image).
+    5) CASE          : 검증된 사례 수치. verified=false면 화면에 수치 미표기.
+    6) /images/*     : hero-private72.webp / customer-search.webp / case-a.webp /
+                       form-background.webp / og-private72.jpg (없어도 레이아웃 유지)
+  ============================================================
+-->
+<html class="dark" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>WEPLACE PRIVATE 72</title>
+<meta name="description" content="대표님 매장은 이미 검색되고 있습니다. 문제는 고객이 어느 화면에서 멈추는가입니다. 손님이 매장을 이해하는 흐름을 1분 안에 먼저 확인하세요."/>
+<meta name="robots" content="noindex, nofollow"/>
+<meta name="theme-color" content="#1A1612"/>
+<link rel="canonical" href="https://weplace-private72.netlify.app/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="WEPLACE PRIVATE 72"/>
+<meta property="og:description" content="고객은 브랜드를 만나기 전, 이미 표면에서 판단합니다. 손님이 어느 화면에서 멈추는지 1분 진단으로 먼저 확인하세요."/>
+<meta property="og:url" content="https://weplace-private72.netlify.app/"/>
+<meta property="og:image" content="https://weplace-private72.netlify.app/images/og-private72.jpg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="WEPLACE PRIVATE 72"/>
+<meta name="twitter:description" content="손님이 어느 화면에서 멈추는지 1분 진단으로 먼저 확인하세요."/>
+<meta name="twitter:image" content="https://weplace-private72.netlify.app/images/og-private72.jpg"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style id="base">
+*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}[multiple],[type=date],[type=datetime-local],[type=email],[type=month],[type=number],[type=password],[type=search],[type=tel],[type=text],[type=time],[type=url],[type=week],input:where(:not([type])),select,textarea{-webkit-appearance:none;-moz-appearance:none;appearance:none;background-color:#fff;border-color:#6b7280;border-width:1px;border-radius:0;padding:.5rem .75rem;font-size:1rem;line-height:1.5rem;--tw-shadow:0 0 #0000}[multiple]:focus,[type=date]:focus,[type=datetime-local]:focus,[type=email]:focus,[type=month]:focus,[type=number]:focus,[type=password]:focus,[type=search]:focus,[type=tel]:focus,[type=text]:focus,[type=time]:focus,[type=url]:focus,[type=week]:focus,input:where(:not([type])):focus,select:focus,textarea:focus{outline:2px solid transparent;outline-offset:2px;--tw-ring-inset:var(--tw-empty,/*!*/ /*!*/);--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:#2563eb;--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow);border-color:#2563eb}input::-moz-placeholder,textarea::-moz-placeholder{color:#6b7280;opacity:1}input::placeholder,textarea::placeholder{color:#6b7280;opacity:1}::-webkit-datetime-edit-fields-wrapper{padding:0}::-webkit-date-and-time-value{min-height:1.5em;text-align:inherit}::-webkit-datetime-edit{display:inline-flex}::-webkit-datetime-edit,::-webkit-datetime-edit-day-field,::-webkit-datetime-edit-hour-field,::-webkit-datetime-edit-meridiem-field,::-webkit-datetime-edit-millisecond-field,::-webkit-datetime-edit-minute-field,::-webkit-datetime-edit-month-field,::-webkit-datetime-edit-second-field,::-webkit-datetime-edit-year-field{padding-top:0;padding-bottom:0}select{background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");background-position:right .5rem center;background-repeat:no-repeat;background-size:1.5em 1.5em;padding-right:2.5rem;-webkit-print-color-adjust:exact;print-color-adjust:exact}[multiple],[size]:where(select:not([size="1"])){background-image:none;background-position:0 0;background-repeat:unset;background-size:initial;padding-right:.75rem;-webkit-print-color-adjust:unset;print-color-adjust:unset}[type=checkbox],[type=radio]{-webkit-appearance:none;-moz-appearance:none;appearance:none;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact;display:inline-block;vertical-align:middle;background-origin:border-box;-webkit-user-select:none;-moz-user-select:none;user-select:none;flex-shrink:0;height:1rem;width:1rem;color:#2563eb;background-color:#fff;border-color:#6b7280;border-width:1px;--tw-shadow:0 0 #0000}[type=checkbox]{border-radius:0}[type=radio]{border-radius:100%}[type=checkbox]:focus,[type=radio]:focus{outline:2px solid transparent;outline-offset:2px;--tw-ring-inset:var(--tw-empty,/*!*/ /*!*/);--tw-ring-offset-width:2px;--tw-ring-offset-color:#fff;--tw-ring-color:#2563eb;--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}[type=checkbox]:checked,[type=radio]:checked{border-color:transparent;background-color:currentColor;background-size:100% 100%;background-position:50%;background-repeat:no-repeat}[type=checkbox]:checked{background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 16 16'%3E%3Cpath d='M12.207 4.793a1 1 0 0 1 0 1.414l-5 5a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L6.5 9.086l4.293-4.293a1 1 0 0 1 1.414 0'/%3E%3C/svg%3E")}@media (forced-colors:active) {[type=checkbox]:checked{-webkit-appearance:auto;-moz-appearance:auto;appearance:auto}}[type=radio]:checked{background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='3'/%3E%3C/svg%3E")}@media (forced-colors:active) {[type=radio]:checked{-webkit-appearance:auto;-moz-appearance:auto;appearance:auto}}[type=checkbox]:checked:focus,[type=checkbox]:checked:hover,[type=radio]:checked:focus,[type=radio]:checked:hover{border-color:transparent;background-color:currentColor}[type=checkbox]:indeterminate{background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 16'%3E%3Cpath stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 8h8'/%3E%3C/svg%3E");border-color:transparent;background-color:currentColor;background-size:100% 100%;background-position:50%;background-repeat:no-repeat}@media (forced-colors:active) {[type=checkbox]:indeterminate{-webkit-appearance:auto;-moz-appearance:auto;appearance:auto}}[type=checkbox]:indeterminate:focus,[type=checkbox]:indeterminate:hover{border-color:transparent;background-color:currentColor}[type=file]{background:unset;border-color:inherit;border-width:0;border-radius:0;padding:0;font-size:unset;line-height:inherit}[type=file]:focus{outline:1px solid ButtonText;outline:1px auto -webkit-focus-ring-color}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0}.-right-20{right:-5rem}.-top-20{top:-5rem}.z-10{z-index:10}.mx-1{margin-left:.25rem;margin-right:.25rem}.mx-auto{margin-left:auto;margin-right:auto}.mb-1{margin-bottom:.25rem}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:.75rem}.mb-4{margin-bottom:1rem}.mb-5{margin-bottom:1.25rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.mb-stack-md{margin-bottom:32px}.mr-1{margin-right:.25rem}.mt-1{margin-top:.25rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-6{margin-top:1.5rem}.block{display:block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.aspect-\[4\/3\]{aspect-ratio:4/3}.h-1{height:.25rem}.h-10{height:2.5rem}.h-12{height:3rem}.h-20{height:5rem}.h-40{height:10rem}.h-64{height:16rem}.h-8{height:2rem}.h-\[85vh\]{height:85vh}.min-h-\[600px\]{min-height:600px}.w-1\/2{width:50%}.w-10{width:2.5rem}.w-12{width:3rem}.w-2\/3{width:66.666667%}.w-3\/4{width:75%}.w-40{width:10rem}.w-8{width:2rem}.w-fit{width:-moz-fit-content;width:fit-content}.w-full{width:100%}.max-w-md{max-width:28rem}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.cursor-pointer{cursor:pointer}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.justify-around{justify-content:space-around}.gap-1{gap:.25rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-unit{gap:8px}.gap-x-6{-moz-column-gap:1.5rem;column-gap:1.5rem}.gap-y-4{row-gap:1rem}.overflow-hidden{overflow:hidden}.text-wrap{text-wrap:wrap}.text-balance{text-wrap:balance}.rounded{border-radius:.125rem}.rounded-full{border-radius:.75rem}.rounded-lg{border-radius:.25rem}.rounded-xl{border-radius:.5rem}.border{border-width:1px}.border-0{border-width:0}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-outline-variant{--tw-border-opacity:1;border-color:rgb(76 70 63/var(--tw-border-opacity,1))}.border-outline-variant\/20{border-color:rgba(76,70,63,.2)}.border-outline-variant\/30{border-color:rgba(76,70,63,.3)}.border-outline-variant\/40{border-color:rgba(76,70,63,.4)}.border-outline-variant\/50{border-color:rgba(76,70,63,.5)}.border-primary\/50{border-color:hsla(26,14%,78%,.5)}.bg-background{--tw-bg-opacity:1;background-color:rgb(20 19 19/var(--tw-bg-opacity,1))}.bg-background\/40{background-color:hsla(0,3%,8%,.4)}.bg-muted-gold{--tw-bg-opacity:1;background-color:rgb(166 129 59/var(--tw-bg-opacity,1))}.bg-primary{--tw-bg-opacity:1;background-color:rgb(206 197 190/var(--tw-bg-opacity,1))}.bg-primary\/10{background-color:hsla(26,14%,78%,.1)}.bg-primary\/5{background-color:hsla(26,14%,78%,.05)}.bg-surface{--tw-bg-opacity:1;background-color:rgb(20 19 19/var(--tw-bg-opacity,1))}.bg-surface-container-highest{--tw-bg-opacity:1;background-color:rgb(54 52 52/var(--tw-bg-opacity,1))}.bg-surface-container-low{--tw-bg-opacity:1;background-color:rgb(28 27 27/var(--tw-bg-opacity,1))}.bg-surface-container-low\/80{background-color:rgba(28,27,27,.8)}.bg-surface-container-lowest{--tw-bg-opacity:1;background-color:rgb(15 14 14/var(--tw-bg-opacity,1))}.bg-surface-variant{--tw-bg-opacity:1;background-color:rgb(54 52 52/var(--tw-bg-opacity,1))}.bg-surface\/95{background-color:hsla(0,3%,8%,.95)}.bg-transparent{background-color:transparent}.bg-gradient-to-t{background-image:linear-gradient(to top,var(--tw-gradient-stops))}.from-background{--tw-gradient-from:#141313 var(--tw-gradient-from-position);--tw-gradient-to:hsla(0,3%,8%,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.via-background\/80{--tw-gradient-to:hsla(0,3%,8%,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),hsla(0,3%,8%,.8) var(--tw-gradient-via-position),var(--tw-gradient-to)}.to-transparent{--tw-gradient-to:transparent var(--tw-gradient-to-position)}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.p-margin-mobile{padding:20px}.px-0{padding-left:0;padding-right:0}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-margin-mobile{padding-left:20px;padding-right:20px}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.py-stack-lg{padding-top:64px;padding-bottom:64px}.pb-32{padding-bottom:8rem}.pb-6{padding-bottom:1.5rem}.pb-stack-lg{padding-bottom:64px}.pb-stack-md{padding-bottom:32px}.pt-4{padding-top:1rem}.pt-\[72px\]{padding-top:72px}.text-left{text-align:left}.text-center{text-align:center}.font-body-lg,.font-body-md{font-family:Manrope,sans-serif}.font-headline-lg,.font-headline-md,.font-headline-md-mobile,.font-headline-xl{font-family:Noto Serif KR,Noto Serif,serif}.font-label-sm{font-family:Manrope,sans-serif}.font-serif{font-family:ui-serif,Georgia,Cambria,Times New Roman,Times,serif}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-\[14px\]{font-size:14px}.text-\[16px\]{font-size:16px}.text-\[20px\]{font-size:20px}.text-body-lg{font-size:18px}.text-body-lg,.text-body-md{line-height:1.6;font-weight:400}.text-body-md{font-size:16px}.text-headline-lg{font-size:32px;line-height:1.2;letter-spacing:-.01em;font-weight:600}.text-headline-md{font-size:24px;line-height:1.3;font-weight:500}.text-headline-md-mobile{font-size:20px;line-height:1.3;font-weight:600}.text-headline-xl{font-size:48px;line-height:1.1;letter-spacing:-.02em;font-weight:600}.text-label-sm{font-size:12px;line-height:1.2;letter-spacing:.05em;font-weight:700}.font-bold{font-weight:700}.font-medium{font-weight:500}.uppercase{text-transform:uppercase}.leading-relaxed{line-height:1.625}.tracking-tight{letter-spacing:-.025em}.tracking-wider{letter-spacing:.05em}.tracking-widest{letter-spacing:.1em}.text-error{--tw-text-opacity:1;color:rgb(255 180 171/var(--tw-text-opacity,1))}.text-muted-gold{--tw-text-opacity:1;color:rgb(166 129 59/var(--tw-text-opacity,1))}.text-on-background{--tw-text-opacity:1;color:rgb(230 225 224/var(--tw-text-opacity,1))}.text-on-primary{--tw-text-opacity:1;color:rgb(52 48 43/var(--tw-text-opacity,1))}.text-on-surface{--tw-text-opacity:1;color:rgb(230 225 224/var(--tw-text-opacity,1))}.text-on-surface-variant{--tw-text-opacity:1;color:rgb(207 197 188/var(--tw-text-opacity,1))}.text-on-surface-variant\/60{color:hsla(28,17%,77%,.6)}.text-outline-variant{--tw-text-opacity:1;color:rgb(76 70 63/var(--tw-text-opacity,1))}.text-primary{--tw-text-opacity:1;color:rgb(206 197 190/var(--tw-text-opacity,1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.accent-\[\#A6813B\]{accent-color:#a6813b}.opacity-20{opacity:.2}.shadow-sm{--tw-shadow:0 1px 2px 0 rgba(0,0,0,.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.outline{outline-style:solid}.blur-\[80px\]{--tw-blur:blur(80px)}.blur-\[80px\],.grayscale{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.grayscale{--tw-grayscale:grayscale(100%)}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur-md{--tw-backdrop-blur:blur(12px)}.backdrop-blur-md,.backdrop-blur-sm{-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-colors{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-opacity{transition-property:opacity;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(.4,0,.2,1)}.duration-150,.transition-transform{transition-duration:.15s}.duration-300{transition-duration:.3s}.hover\:border-primary:hover{--tw-border-opacity:1;border-color:rgb(206 197 190/var(--tw-border-opacity,1))}.hover\:bg-primary-fixed-dim:hover{--tw-bg-opacity:1;background-color:rgb(206 197 190/var(--tw-bg-opacity,1))}.hover\:bg-primary\/5:hover{background-color:hsla(26,14%,78%,.05)}.hover\:bg-surface-variant:hover{--tw-bg-opacity:1;background-color:rgb(54 52 52/var(--tw-bg-opacity,1))}.focus\:ring-0:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}.group:hover .group-hover\:text-primary{--tw-text-opacity:1;color:rgb(206 197 190/var(--tw-text-opacity,1))}@media (min-width:640px){.sm\:p-8{padding:2rem}}@media (min-width:768px){.md\:hidden{display:none}}
+
+</style>
+<style id="app">
+  body{ background-color:#1A1612; color:#e6e1e0; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; word-break:keep-all; }
+  .material-symbols-outlined{ font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; line-height:1; vertical-align:middle; }
+  .grain-overlay{ position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:9999; opacity:.03;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
+  .editorial-container{ max-width:640px; margin:0 auto; background-color:#141313; min-height:100vh; position:relative; box-shadow:0 0 40px rgba(0,0,0,.5); }
+  .text-balance{ text-wrap:balance; }
+  .gold-border{ border:1px solid rgba(166,129,59,.2); }
+  .input-diagnostic:focus{ border-bottom-color:#A6813B; outline:none; box-shadow:0 1px 0 0 #A6813B; }
+  .top-app-bar-fixed{ position:fixed; top:0; left:50%; transform:translateX(-50%); width:100%; max-width:640px; z-index:50; }
+  .bottom-nav-fixed{ position:fixed; bottom:0; left:50%; transform:translateX(-50%); width:100%; max-width:640px; z-index:50; padding-bottom:env(safe-area-inset-bottom); }
+  ::-webkit-scrollbar{ width:8px; } ::-webkit-scrollbar-track{ background:#141313; }
+  ::-webkit-scrollbar-thumb{ background:#363434; border-radius:4px; } ::-webkit-scrollbar-thumb:hover{ background:#474744; }
+  /* 이미지: 로컬 경로 + 깨짐 방지 fallback */
+  .bg-img{ background-color:#201f1f; background-size:cover; background-position:center; }
+  .hero-bg{ background-image:url('/images/hero-private72.webp'); }
+  .form-bg{ background-image:linear-gradient(to bottom, transparent, rgba(20,19,19,.92)), url('/images/form-background.webp'); background-position:center bottom; }
+  img.cover-img{ object-fit:cover; width:100%; height:100%; display:block; }
+  /* 진행 막대 */
+  .prog-track{ width:64px; height:4px; background:#363434; border-radius:9999px; overflow:hidden; }
+  .prog-fill{ height:100%; background:#cec5be; border-radius:9999px; transition:width .4s ease; }
+  /* 절제된 fade 전환 (reduced motion에서 즉시) */
+  .step-fade{ transition:opacity .38s ease; }
+  .step-fade.is-out{ opacity:0; }
+  /* Hero proof strip (메인 헤드라인보다 작게 · 세일 배지 아님) */
+  .hero-proof-num{ font-family:'Noto Serif KR', serif; font-weight:600; font-size:26px; line-height:1; letter-spacing:-0.02em; color:#cfc5bc; font-variant-numeric:tabular-nums; }
+  .hero-proof-after{ color:#e6e1e0; }
+  .hero-proof-pct{ font-family:'Manrope', sans-serif; font-weight:700; font-size:15px; color:#A6813B; letter-spacing:0; margin-left:4px; font-variant-numeric:tabular-nums; }
+  /* 사례 핵심 숫자 장면 (섹션에서 가장 큰 숫자 · 빨강/초록·대시보드 금지) */
+  .case-number-flow{ display:flex; align-items:baseline; justify-content:center; flex-wrap:wrap; gap:12px; font-size:clamp(42px,12vw,68px); line-height:1; letter-spacing:-0.04em; font-variant-numeric:tabular-nums; font-family:'Noto Serif KR', serif; font-weight:600; }
+  .cn-before{ color:#cfc5bc; }
+  .cn-after{ color:#e6e1e0; }
+  .cn-arrow{ color:#A6813B; font-size:clamp(30px,9vw,50px); align-self:center; }
+  .cn-pct{ font-family:'Manrope', sans-serif; font-weight:700; font-size:clamp(20px,6vw,28px); color:#A6813B; letter-spacing:-0.01em; font-variant-numeric:tabular-nums; }
+  /* 선택형 추가질문 선택 상태 */
+  .opt-pick{ border-color:#cec5be !important; background-color:hsla(26,14%,78%,.06) !important; }
+  .opt-pick .opt-ico{ color:#cec5be !important; }
+  /* select 화살표 */
+  select.input-diagnostic{ -webkit-appearance:none; appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23cfc5bc' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 0 center; padding-right:24px; }
+  select.input-diagnostic option{ background-color:#201f1f; color:#e6e1e0; }
+  /* 접근성 */
+  button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible{ outline:2px solid #A6813B; outline-offset:2px; }
+  .is-hidden{ display:none !important; }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.001ms !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+  }
+  html{ scroll-behavior:smooth; }
+</style>
+</head>
+<body class="bg-background text-on-background relative">
+<div class="grain-overlay"></div>
+<div class="editorial-container pb-32">
+
+<!-- TopAppBar -->
+<header class="top-app-bar-fixed flex justify-between items-center px-margin-mobile py-4 bg-surface border-b border-outline-variant transition-opacity duration-300">
+<div class="font-headline-md-mobile text-headline-md-mobile text-primary tracking-tight">WEPLACE PRIVATE 72</div>
+<div class="flex items-center gap-4 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">schedule</span>
+</div>
+</header>
+
+<main class="pt-[72px]">
+
+<!-- ============ Section 01 · Private Invitation Hero ============ -->
+<section id="hero" class="relative h-[85vh] min-h-[600px] flex flex-col justify-end p-margin-mobile pb-stack-md bg-img hero-bg">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
+<div class="relative z-10 flex flex-col gap-unit">
+<div id="hero-badge" class="inline-flex items-center w-fit px-3 py-1 bg-surface-container-low/80 backdrop-blur-sm border border-outline-variant rounded text-primary text-label-sm font-label-sm mb-4">
+<span class="material-symbols-outlined text-[16px] mr-1">lock</span> 카카오 메시지를 받은 대표님 전용
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface text-balance mb-3">대표님 매장은 이미 검색되고 있습니다.</h1>
+<p class="font-body-lg text-body-lg text-on-surface text-balance mb-2">문제는 고객이 어느 화면에서 멈추는가입니다.</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-balance mb-6">손님이 매장을 이해하는 흐름을 1분 안에 먼저 확인해보세요.</p>
+<button data-action="hero-proof" id="hero-proof" type="button" class="w-full text-left bg-surface-container-low/80 backdrop-blur-sm border border-outline-variant rounded px-4 py-3 mb-8">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-sm text-label-sm text-muted-gold uppercase tracking-widest">Actual Signal</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">익명 실제 사례</span>
+</div>
+<p id="hp-metric" class="font-label-sm text-label-sm text-on-surface-variant mb-1">월간 네이버 플레이스 방문자 수</p>
+<div class="flex items-baseline flex-wrap gap-2">
+<span id="hp-before" class="hero-proof-num">700</span>
+<span class="material-symbols-outlined text-muted-gold text-[20px]" style="align-self:center;">arrow_forward</span>
+<span id="hp-after" class="hero-proof-num hero-proof-after">1,200</span>
+<span id="hp-pct" class="hero-proof-pct">+71.4%</span>
+</div>
+<span class="inline-flex items-center gap-1 mt-2 text-primary">
+<span class="font-label-sm text-label-sm">아래에서 측정 기준 확인</span>
+<span class="material-symbols-outlined text-[16px]">arrow_downward</span>
+</span>
+</button>
+<div id="countdown-wrap" class="flex items-center gap-4 mb-8">
+<div class="flex flex-col">
+<span id="countdown-label" class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Offer Expires In</span>
+<div class="flex items-center gap-2 font-headline-md text-headline-md text-primary" id="countdown">
+<span data-cd="h">--</span><span class="text-outline-variant">:</span>
+<span data-cd="m">--</span><span class="text-outline-variant">:</span>
+<span data-cd="s">--</span>
+</div>
+</div>
+</div>
+<button data-action="goto-diagnosis" type="button" class="w-full bg-primary text-on-primary font-body-md text-body-md py-4 rounded hover:bg-primary-fixed-dim transition-colors flex justify-center items-center gap-2 font-medium">
+1분 진단 시작 <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+<p class="font-label-sm text-label-sm text-on-surface-variant text-center mt-3">회원가입 없이 시작 · 결과 즉시 확인</p>
+</div>
+</section>
+
+<!-- ============ Section 02 · 고객이 검색하는 장면 ============ -->
+<section class="py-stack-lg px-margin-mobile border-b border-outline-variant/30">
+<div class="mb-stack-md">
+<p class="font-body-lg text-body-lg text-on-surface text-balance leading-relaxed">
+<span class="text-primary font-serif">"</span>광고를 보고 들어온 손님은 한 화면만 보고 결정하지 않습니다.<span class="text-primary font-serif">"</span>
+</p>
+</div>
+<div class="relative h-64 w-full rounded-xl overflow-hidden mb-6 border border-outline-variant/20 bg-img">
+<img class="cover-img" src="/images/customer-search.webp" alt="손님이 검색으로 매장을 살펴보는 장면" width="640" height="256" loading="lazy" onerror="this.style.display='none'"/>
+<div class="absolute inset-0 bg-background/40"></div>
+</div>
+<div class="border border-outline-variant/30 rounded-lg bg-surface-container-low px-4 py-3 mb-6">
+<p class="font-label-sm text-label-sm text-on-surface-variant tracking-wider leading-relaxed text-center">네이버 플레이스 › 지도·검색 › 대표사진 › 리뷰 › 홈페이지 › 예약·전화 › 방문 판단</p>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div class="p-4 bg-surface-container-low border border-outline-variant/30 rounded-lg flex flex-col gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-primary mb-2">N</div>
+<div class="w-1/2 h-1 bg-surface-variant rounded"></div><div class="w-3/4 h-1 bg-surface-variant rounded"></div>
+</div>
+<div class="p-4 bg-surface-container-low border border-outline-variant/30 rounded-lg flex flex-col gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-primary mb-2">G</div>
+<div class="w-1/2 h-1 bg-surface-variant rounded"></div><div class="w-3/4 h-1 bg-surface-variant rounded"></div>
+</div>
+<div class="p-4 bg-surface-container-low border border-outline-variant/30 rounded-lg flex flex-col gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center text-primary mb-2"><span class="material-symbols-outlined text-[16px]">home</span></div>
+<div class="w-1/2 h-1 bg-surface-variant rounded"></div><div class="w-3/4 h-1 bg-surface-variant rounded"></div>
+</div>
+<div class="p-4 bg-surface-container-low border border-outline-variant/30 rounded-lg flex flex-col gap-2">
+<div class="flex gap-1 mb-3">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings:'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings:'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings:'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings:'FILL' 1;">star</span>
+</div>
+<div class="w-full h-1 bg-surface-variant rounded"></div><div class="w-2/3 h-1 bg-surface-variant rounded"></div>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-balance leading-relaxed">작은 어긋남이 쌓이면, 좋은 매장도 선택지에서 빠집니다.</p>
+</section>
+
+<!-- ============ Section 03 · 1분 진단 플레이 (5문항) ============ -->
+<section id="diagnosis" class="py-stack-lg px-margin-mobile border-b border-outline-variant/30 bg-surface-container-lowest">
+<div class="mb-8">
+<div class="flex items-center justify-between mb-3">
+<span id="q-stage-code" class="font-label-sm text-label-sm text-primary uppercase tracking-widest">01 FIRST IMPRESSION</span>
+<span id="q-progress" class="font-label-sm text-label-sm text-on-surface-variant">Q1 / 5</span>
+</div>
+<p id="q-stage-desc" class="font-label-sm text-label-sm text-on-surface-variant mb-3">대표사진이 핵심을 전하는지 확인 중</p>
+<div class="prog-track"><div id="prog-fill" class="prog-fill" style="width:20%"></div></div>
+</div>
+<div id="q-card" class="step-fade bg-surface-container-low border border-outline-variant/50 rounded-xl p-6">
+<h3 id="q-text" class="font-body-lg text-body-lg text-on-surface mb-6">처음 방문하는 고객이 대표사진만 보고 매장의 핵심 서비스를 짐작할 수 있습니까?</h3>
+<div id="q-options" class="flex flex-col gap-3"></div>
+</div>
+</section>
+
+<!-- ============ Section 04 · 무료 진단 결과 (라이브) ============ -->
+<section id="result-section" class="py-stack-lg px-margin-mobile border-b border-outline-variant/30">
+<div id="result-placeholder" class="p-5 border border-outline-variant/30 rounded-lg bg-surface flex items-start gap-4">
+<div class="w-10 h-10 rounded bg-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant">troubleshoot</span>
+</div>
+<div>
+<h4 class="font-body-md text-body-md font-bold text-on-surface mb-1">진단을 완료하면 여기에 표시됩니다</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant leading-relaxed">위 5개 질문에 답하시면, 평가가 아니라 <strong class="text-on-surface">먼저 정리할 순서</strong>를 정리해 드립니다.</p>
+</div>
+</div>
+
+<div id="result-card" class="is-hidden" aria-live="polite">
+<div class="p-5 border border-outline-variant/40 rounded-lg bg-surface">
+<div class="flex items-center gap-3 mb-5">
+<div class="w-10 h-10 rounded bg-surface-variant flex items-center justify-center shrink-0">
+<span id="result-icon" class="material-symbols-outlined text-on-surface">visibility_off</span>
+</div>
+<div>
+<span id="result-code" class="font-label-sm text-label-sm text-primary uppercase tracking-widest block">RESULT CODE · S01</span>
+<h3 id="result-type" class="font-headline-md text-headline-md text-on-surface">첫인상 간격형</h3>
+<span id="result-tag" class="font-label-sm text-label-sm text-on-surface-variant">검색 표면</span>
+</div>
+</div>
+<div class="pt-4 border-t border-outline-variant/20">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">지금 잘 작동하는 신호</p>
+<p id="result-strength" class="font-body-md text-body-md text-on-surface text-balance leading-relaxed mb-4"></p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">고객 머릿속 문장</p>
+<p id="result-thought" class="font-body-md text-body-md text-on-surface text-balance leading-relaxed mb-4"></p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">먼저 확인할 영역</p>
+<p id="result-check" class="font-body-md text-body-md text-on-surface text-balance leading-relaxed mb-4"></p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">기본 우선순위</p>
+<p id="result-priority" class="font-body-md text-body-md text-on-surface text-balance leading-relaxed"></p>
+<p id="result-relation" class="is-hidden font-body-md text-body-md text-on-surface-variant text-balance leading-relaxed mt-4"></p>
+</div>
+<div class="pt-4 mt-4 border-t border-outline-variant/20">
+<p class="font-body-md text-body-md text-on-surface-variant text-balance leading-relaxed mb-4">온라인 질문으로 확인할 수 있는 범위는 여기까지입니다. 실제 매장 화면을 함께 열면 다음 세 가지를 더 확인할 수 있습니다.</p>
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-primary">arrow_right</span><p class="font-body-md text-body-md text-on-surface">고객이 가장 먼저 멈추는 화면</p></div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-primary">arrow_right</span><p class="font-body-md text-body-md text-on-surface">다음 단계 전에 필요한 기반</p></div>
+<div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-primary">arrow_right</span><p class="font-body-md text-body-md text-on-surface">현재 예산에서 가장 먼저 바꿀 한 가지</p></div>
+</div>
+</div>
+<button data-action="goto-form" type="button" class="w-full bg-primary text-on-primary font-body-md text-body-md py-4 rounded hover:bg-primary-fixed-dim transition-colors mt-6 flex justify-center items-center gap-2">
+내 매장 결과 해석하기 <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+<button data-action="restart" type="button" class="w-full font-label-sm text-label-sm text-on-surface-variant text-center mt-4 py-2">처음부터 다시 진단하기</button>
+</div>
+</div>
+
+<!-- 선택형 추가질문 (결과 계산 제외, review_interest로만 저장) -->
+<div id="followup" class="is-hidden mt-6">
+<div class="bg-surface-container-low border border-outline-variant/50 rounded-xl p-6">
+<h3 class="font-body-lg text-body-lg text-on-surface mb-2">현재 가장 먼저 확인하고 싶은 곳은 어디인가요?</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-5">선택하지 않아도 결과 확인과 신청이 가능합니다.</p>
+<div class="flex flex-col gap-3">
+<button data-fu="대표사진과 첫 문장" type="button" class="w-full text-left p-4 rounded-lg border border-outline-variant transition-all flex items-center justify-between"><span class="font-body-md text-body-md text-on-surface-variant">대표사진과 첫 문장</span><span class="opt-ico material-symbols-outlined text-outline-variant">radio_button_unchecked</span></button>
+<button data-fu="리뷰와 신뢰" type="button" class="w-full text-left p-4 rounded-lg border border-outline-variant transition-all flex items-center justify-between"><span class="font-body-md text-body-md text-on-surface-variant">리뷰와 신뢰</span><span class="opt-ico material-symbols-outlined text-outline-variant">radio_button_unchecked</span></button>
+<button data-fu="예약·문의 동선" type="button" class="w-full text-left p-4 rounded-lg border border-outline-variant transition-all flex items-center justify-between"><span class="font-body-md text-body-md text-on-surface-variant">예약·문의 동선</span><span class="opt-ico material-symbols-outlined text-outline-variant">radio_button_unchecked</span></button>
+<button data-fu="네이버·구글·홈페이지 전체" type="button" class="w-full text-left p-4 rounded-lg border border-outline-variant transition-all flex items-center justify-between"><span class="font-body-md text-body-md text-on-surface-variant">네이버·구글·홈페이지 전체</span><span class="opt-ico material-symbols-outlined text-outline-variant">radio_button_unchecked</span></button>
+<button data-fu="무엇부터 봐야 할지 모르겠다" type="button" class="w-full text-left p-4 rounded-lg border border-outline-variant transition-all flex items-center justify-between"><span class="font-body-md text-body-md text-on-surface-variant">무엇부터 봐야 할지 모르겠다</span><span class="opt-ico material-symbols-outlined text-outline-variant">radio_button_unchecked</span></button>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============ Section 05 · 익명 성과 사례 ============ -->
+<section id="case" class="py-stack-lg px-margin-mobile border-b border-outline-variant/30 bg-surface-container-lowest">
+<div class="mb-6">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Case Study</span>
+<h2 class="font-headline-md text-headline-md text-on-surface text-balance">실제 화면을 정리한 뒤 검색 반응이 달라진 사례가 있습니다.</h2>
+<p id="case-name" class="font-body-md text-body-md text-on-surface-variant mt-2">서울 동남권 예약형 전문 서비스 A</p>
+</div>
+<div class="w-full aspect-[4/3] rounded-xl overflow-hidden mb-6 border border-outline-variant/20 bg-img">
+<img class="cover-img" src="/images/case-a.webp" alt="익명화된 예약형 전문 서비스의 온라인 화면 개선 사례" width="640" height="480" loading="lazy" onerror="this.style.display='none'"/>
+</div>
+
+<!-- 5. 핵심 숫자 장면 (검증된 값) -->
+<div id="case-numbers" class="step-fade bg-surface border border-outline-variant/30 rounded-xl p-6 mb-6">
+<span class="font-label-sm text-label-sm text-muted-gold uppercase tracking-widest mb-3 block text-center">Verified Result</span>
+<p id="cn-metric" class="font-body-md text-body-md text-on-surface-variant text-center mb-4">월간 네이버 플레이스 방문자 수</p>
+<div class="case-number-flow">
+<span id="cn-before" class="cn-before">700</span>
+<span class="material-symbols-outlined cn-arrow">arrow_forward</span>
+<span id="cn-after" class="cn-after">1,200</span>
+</div>
+<div class="flex items-center justify-center gap-3 mt-4">
+<span id="cn-count" class="font-body-md text-body-md text-on-surface-variant">+500명 증가</span>
+<span id="cn-pct" class="cn-pct">+71.4%</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface text-balance leading-relaxed text-center mt-6">방문자가 늘어난 것보다 중요한 것은, 들어온 고객이 다음 화면으로 이동할 이유가 정리됐다는 점입니다.</p>
+</div>
+
+<!-- 6. 측정 조건 (미확정 항목은 '확인 후 반영') -->
+<div id="case-conditions" class="bg-surface border border-outline-variant/30 rounded-lg p-5 mb-6 flex flex-col gap-3">
+<div class="flex items-center justify-between gap-3"><span class="font-label-sm text-label-sm text-on-surface-variant shrink-0">측정 기간</span><span id="cc-period" class="font-body-md text-body-md text-on-surface text-right">확인 후 반영</span></div>
+<div class="flex items-center justify-between gap-3"><span class="font-label-sm text-label-sm text-on-surface-variant shrink-0">비교 방식</span><span id="cc-basis" class="font-body-md text-body-md text-on-surface text-right">확인 후 반영</span></div>
+<div class="flex items-center justify-between gap-3"><span class="font-label-sm text-label-sm text-on-surface-variant shrink-0">광고비 포함 여부</span><span id="cc-adspend" class="font-body-md text-body-md text-on-surface text-right">확인 후 반영</span></div>
+</div>
+
+<!-- 검증 게이팅 fallback: verified=false일 때만 표시 -->
+<div id="case-unverified" class="is-hidden bg-surface border border-outline-variant/30 rounded-lg p-6 mb-6">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-on-surface-variant shrink-0">lock_clock</span>
+<div>
+<p class="font-body-md text-body-md text-on-surface mb-1">성과 수치는 내부 데이터 검증 후 공개합니다.</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant leading-relaxed">측정 기간 · 비교 방식 · 광고비 포함 여부가 확인되면 정확한 지표로 반영합니다.</p>
+</div>
+</div>
+</div>
+
+<!-- Before / Action / Insight (정성 설명, 항상 표시) -->
+<div class="flex flex-col gap-5 mb-6">
+<div>
+<p class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2">Before</p>
+<div class="flex flex-col gap-2">
+<p class="font-body-md text-body-md text-on-surface-variant">· 대표사진과 핵심 서비스 인식 사이의 간격</p>
+<p class="font-body-md text-body-md text-on-surface-variant">· 채널별 정보와 메시지 차이</p>
+<p class="font-body-md text-body-md text-on-surface-variant">· 검색 이후 행동 경로가 약함</p>
+</div>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2">Action</p>
+<div class="flex flex-col gap-2">
+<p class="font-body-md text-body-md text-on-surface-variant">· 대표 이미지 기준 정리</p>
+<p class="font-body-md text-body-md text-on-surface-variant">· 네이버 플레이스 설명 구조 수정</p>
+<p class="font-body-md text-body-md text-on-surface-variant">· 진단형 랜딩 연결</p>
+<p class="font-body-md text-body-md text-on-surface-variant">· 문의·예약 경로 단순화</p>
+<p class="font-body-md text-body-md text-on-surface-variant">· 검색 후 확인할 근거 보강</p>
+</div>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2">Insight</p>
+<p class="font-body-md text-body-md text-on-surface text-balance leading-relaxed">더 많이 노출하기 전에, 들어온 고객이 덜 헤매게 만드는 작업이 먼저였습니다.</p>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-3 py-1.5 rounded-full border border-outline-variant/40 font-label-sm text-label-sm text-on-surface-variant bg-surface">대표 이미지</span>
+<span class="px-3 py-1.5 rounded-full border border-outline-variant/40 font-label-sm text-label-sm text-on-surface-variant bg-surface">플레이스 설명</span>
+<span class="px-3 py-1.5 rounded-full border border-outline-variant/40 font-label-sm text-label-sm text-on-surface-variant bg-surface">진단형 랜딩</span>
+<span class="px-3 py-1.5 rounded-full border border-outline-variant/40 font-label-sm text-label-sm text-on-surface-variant bg-surface">예약 경로</span>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant leading-relaxed">고객 정보와 프로젝트 관계를 보호하기 위해 상호명은 공개하지 않습니다. 구체적인 실행 범위는 결과 해석 과정에서 확인할 수 있습니다.</p>
+</section>
+
+<!-- ============ Section 06 · Next Level Preview ============ -->
+<section id="next-level" class="py-stack-lg px-margin-mobile border-b border-outline-variant/30">
+<div class="border border-outline-variant/40 rounded-xl p-8 bg-surface-container-low">
+<span class="font-label-sm text-label-sm text-muted-gold uppercase tracking-widest mb-3 block">NEXT STEP</span>
+<h2 class="font-headline-md text-headline-md text-on-surface text-balance mb-4">내 매장의 실제 화면으로 결과 확인하기</h2>
+<p class="font-body-md text-body-md text-on-surface-variant text-balance leading-relaxed mb-6">테스트 결과와 네이버·구글·홈페이지 화면을 함께 보며, 고객이 멈추는 지점과 먼저 바꿀 순서를 한 장으로 정리합니다.</p>
+<div class="flex flex-col gap-3 mb-6">
+<div class="flex items-center gap-3 p-4 border border-outline-variant/30 rounded-lg bg-surface"><span class="material-symbols-outlined text-primary">find_in_page</span><p class="font-body-md text-body-md text-on-surface">실제 병목 화면</p></div>
+<div class="flex items-center gap-3 p-4 border border-outline-variant/30 rounded-lg bg-surface"><span class="material-symbols-outlined text-primary">format_list_numbered</span><p class="font-body-md text-body-md text-on-surface">1순위 · 2순위 · 3순위</p></div>
+<div class="flex items-center gap-3 p-4 border border-outline-variant/30 rounded-lg bg-surface"><span class="material-symbols-outlined text-primary">bolt</span><p class="font-body-md text-body-md text-on-surface">현재 예산에서 먼저 바꿀 한 가지</p></div>
+</div>
+<button data-action="meeting" type="button" class="w-full bg-primary text-on-primary font-body-md text-body-md py-4 rounded hover:bg-primary-fixed-dim transition-colors flex justify-center items-center gap-2">
+내 매장 결과 해석하기 <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</section>
+
+<!-- ============ Section 07 · PRIVATE 72 Offer ============ -->
+<section id="offer" class="py-stack-lg px-margin-mobile">
+<div class="gold-border rounded-xl p-8 bg-surface-container-low relative overflow-hidden">
+<div class="absolute -top-20 -right-20 w-40 h-40 bg-muted-gold rounded-full blur-[80px] opacity-20"></div>
+<div class="relative z-10 text-center">
+<span class="material-symbols-outlined text-muted-gold text-3xl mb-4" style="font-variation-settings:'FILL' 1;">verified</span>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-3 block">PRIVATE 72</span>
+<div id="offer-benefit">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-4 text-balance">이 메시지를 받은 대표님께는 초기 진단·설계 범위의 10% 혜택을 72시간 동안 보존합니다.</h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed text-balance">신청이 완료되면 혜택이 보존되며, 결과를 확인한 뒤 진행 여부를 결정할 수 있습니다.</p>
+<ul id="offer-details" class="is-hidden flex flex-col gap-1 mt-4"></ul>
+</div>
+<div id="offer-ended" class="is-hidden">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-4 text-balance">이번 PRIVATE 72 초대는 종료되었습니다</h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed text-balance">지금은 일반 결과 해석 신청을 받고 있습니다. 매장명과 지역만 남겨주시면 됩니다.</p>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-6">진단이 먼저, 작업은 그다음입니다.</p>
+</div>
+</div>
+</section>
+
+<!-- ============ Section 08 · 결과 해석 폼 ============ -->
+<section id="form-section" class="py-stack-lg px-margin-mobile pb-stack-lg bg-img form-bg">
+<div class="bg-surface/95 backdrop-blur-md border border-outline-variant/40 rounded-xl p-6 sm:p-8 max-w-md mx-auto relative z-10">
+<div id="form-wrap">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2 text-center">내 매장 화면으로 결과 확인하기</h2>
+<p class="font-body-md text-body-md text-on-surface-variant text-center text-balance leading-relaxed mb-6">진단 결과와 실제 화면을 함께 보기 위한 최소 정보만 받습니다.</p>
+<form id="lead-form" class="flex flex-col gap-5" novalidate>
+<div>
+<label for="f-store" class="block font-label-sm text-label-sm text-on-surface-variant mb-1">매장명 <span class="text-primary">*</span></label>
+<input id="f-store" name="store" class="w-full bg-transparent border-0 border-b border-outline-variant py-2 px-0 text-on-surface font-body-md text-body-md input-diagnostic focus:ring-0" placeholder="예: ○○ 스튜디오 / 우리 가게 이름" type="text" autocomplete="organization"/>
+</div>
+<div>
+<label for="f-region" class="block font-label-sm text-label-sm text-on-surface-variant mb-1">지역 <span class="text-primary">*</span></label>
+<input id="f-region" name="region" class="w-full bg-transparent border-0 border-b border-outline-variant py-2 px-0 text-on-surface font-body-md text-body-md input-diagnostic focus:ring-0" placeholder="예: 서울 강남구" type="text"/>
+</div>
+<div>
+<label for="f-category" class="block font-label-sm text-label-sm text-on-surface-variant mb-1">업종 <span class="text-on-surface-variant/60">(선택)</span></label>
+<input id="f-category" name="category" class="w-full bg-transparent border-0 border-b border-outline-variant py-2 px-0 text-on-surface font-body-md text-body-md input-diagnostic focus:ring-0" placeholder="예: 카페 · 학원 · 공방 · 연습장" type="text"/>
+</div>
+<div>
+<label for="f-method" class="block font-label-sm text-label-sm text-on-surface-variant mb-1">연락 방식 <span class="text-primary">*</span></label>
+<select id="f-method" name="method" class="w-full bg-transparent border-0 border-b border-outline-variant py-2 px-0 text-on-surface font-body-md text-body-md input-diagnostic focus:ring-0">
+<option value="" disabled selected>선택해 주세요</option>
+<option value="전화">전화</option>
+<option value="카카오톡">카카오톡</option>
+<option value="이메일">이메일</option>
+</select>
+</div>
+<div>
+<label for="f-contact" class="block font-label-sm text-label-sm text-on-surface-variant mb-1">연락처 또는 카카오 ID <span class="text-primary">*</span></label>
+<input id="f-contact" name="contact" class="w-full bg-transparent border-0 border-b border-outline-variant py-2 px-0 text-on-surface font-body-md text-body-md input-diagnostic focus:ring-0" placeholder="010-0000-0000 / 카카오 ID / 이메일" type="text"/>
+</div>
+<label class="flex items-start gap-2 cursor-pointer mt-1">
+<input id="f-consent" name="consent" type="checkbox" class="mt-1 shrink-0 accent-[#A6813B]"/>
+<span class="font-label-sm text-label-sm text-on-surface-variant leading-relaxed">결과 해석과 연락을 위해 위 정보 수집·이용에 동의합니다. 안내 목적 외로 사용하지 않으며, 요청 시 즉시 파기합니다.</span>
+</label>
+<p id="f-error" class="font-label-sm text-label-sm text-error is-hidden" role="alert"></p>
+<button id="f-submit" type="button" class="w-full bg-surface-container-highest border border-outline-variant text-on-surface font-body-md text-body-md py-4 rounded hover:bg-surface-variant transition-colors mt-2">결과 해석 미팅 열기</button>
+</form>
+<p class="font-label-sm text-label-sm text-on-surface-variant text-center mt-6">진단이 먼저, 작업은 그다음입니다.</p>
+</div>
+
+<div id="form-fallback" class="is-hidden text-center py-2">
+<div class="w-12 h-12 rounded-full bg-surface-variant flex items-center justify-center mx-auto mb-4">
+<span class="material-symbols-outlined text-on-surface-variant text-3xl">forum</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-3">카카오톡으로 보내기</h2>
+<p id="fallback-msg" class="font-body-md text-body-md text-on-surface-variant text-balance leading-relaxed mb-6">입력하신 내용은 그대로 남아 있습니다. 아래 버튼을 누르면 내용을 복사해 카카오톡으로 보낼 수 있습니다.</p>
+<button id="fallback-kakao" type="button" class="w-full bg-primary text-on-primary font-body-md text-body-md py-4 rounded hover:bg-primary-fixed-dim transition-colors">카카오톡으로 결과 보내기</button>
+<button id="fallback-back" type="button" class="w-full font-label-sm text-label-sm text-on-surface-variant text-center mt-4 py-2">다시 입력하기</button>
+</div>
+
+<div id="form-success" class="is-hidden text-center py-6">
+<div class="w-12 h-12 rounded-full bg-surface-variant flex items-center justify-center mx-auto mb-4">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings:'FILL' 1;">check_circle</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-3">결과 해석 요청이 접수되었습니다.</h2>
+<p id="success-msg" class="font-body-md text-body-md text-on-surface-variant text-balance leading-relaxed">영업일 기준 하루 안에, 실제 화면을 함께 볼 수 있는 방식으로 연락드립니다.</p>
+</div>
+</div>
+</section>
+
+<div class="w-full" style="height:calc(80px + env(safe-area-inset-bottom))"></div>
+</main>
+
+<!-- BottomNavBar -->
+<nav class="bottom-nav-fixed flex justify-around items-center px-4 h-20 bg-surface-container-low border-t border-outline-variant shadow-sm md:hidden">
+<button id="nav-left" data-action="nav-left" type="button" class="flex flex-1 flex-col items-center justify-center text-on-surface-variant py-3 mx-1 group">
+<span id="nav-left-ico" class="material-symbols-outlined mb-1 group-hover:text-primary">troubleshoot</span>
+<span id="nav-left-label" class="font-label-sm text-label-sm group-hover:text-primary">1분 진단</span>
+</button>
+<button id="nav-right" data-action="nav-right" type="button" class="flex flex-1 flex-col items-center justify-center bg-primary text-on-primary py-3 mx-1 rounded-lg hover:bg-primary-fixed-dim">
+<span id="nav-right-ico" class="material-symbols-outlined mb-1" style="font-variation-settings:'FILL' 1;">arrow_forward</span>
+<span id="nav-right-label" class="font-label-sm text-label-sm">결과 해석</span>
+</button>
+</nav>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ============================================================
+     CONFIG — 배포 전 교체 (placeholder 6종 + CASE/OFFER)
+     ============================================================ */
+  var CONFIG = {
+    CAMPAIGN_ID: "WP_PRIVATE72_202606",
+    CAMPAIGN_END: "CAMPAIGN_END_PLACEHOLDER",   // 예: "2026-07-15T23:59:59+09:00" (KST 고정)
+    CANONICAL_URL: "https://weplace-private72.netlify.app",
+    FORM_ENDPOINT: "FORM_ENDPOINT_PLACEHOLDER", // POST JSON. 없거나 실패 시 카카오 fallback
+    KAKAO_LINK: "KAKAO_LINK_PLACEHOLDER",        // 카카오 채널/오픈채팅 URL
+    OFFER: {
+      activeLabel: "초기 진단·설계 범위 10%",
+      preserveHours: 72,
+      vatIncluded: null,            // true/false 확정 시
+      eligibleProducts: "",         // 적용 범위 확정 시
+      stackable: false,             // 다른 혜택 중복 가능 시 true
+      preserveOnApplication: true,
+      preserveDays: 14,
+      realDeadline: ""              // 표기할 실제 마감 시각 문자열(있을 때만 노출)
+    },
+    CASE: {
+      anonymousCaseId: "CASE_A_001",
+      publicName: "서울 동남권 예약형 전문 서비스 A",
+      metricName: "월간 네이버 플레이스 방문자 수",
+      beforeValue: "700명",
+      afterValue: "1,200명",
+      increaseCount: "500명",
+      increasePct: "+71.4%",        // 700→1,200 = +71.4% 증가 (증가율 고정 · 배수 약 1.71배)
+      ratio: "1.71배",
+      measurementPeriod: "MEASUREMENT_PERIOD_PLACEHOLDER",  // 확정 전 임의 생성 금지 → "확인 후 반영"
+      comparisonMethod: "COMPARISON_METHOD_PLACEHOLDER",
+      adSpendIncluded: "AD_SPEND_STATUS_PLACEHOLDER",
+      verified: true               // 핵심 수치(700/1,200/+500/+71.4%) 검증 완료
+    }
+  };
+
+  /* ============================================================
+     진단 문항 (필수 5문항 · 각 4선택지 · severity 0~3)
+     ============================================================ */
+  var QUESTIONS = [
+    {
+      dim:"impression", stageNo:"01", stageCode:"FIRST IMPRESSION",
+      stageDesc:"대표사진이 핵심을 전하는지 확인 중",
+      q:"처음 방문하는 고객이 대표사진만 보고 매장의 핵심 서비스를 짐작할 수 있습니까?",
+      options:[
+        {t:"분명하게 알 수 있다", sev:0},
+        {t:"어느 정도는 알 수 있다", sev:1},
+        {t:"설명을 더 읽어야 한다", sev:2},
+        {t:"실제 매장과 꽤 다르게 보인다", sev:3}
+      ]
+    },
+    {
+      dim:"consistency", stageNo:"02", stageCode:"CONSISTENCY",
+      stageDesc:"정보가 같은 기준으로 보이는지 확인 중",
+      q:"네이버·지도·홈페이지에서 영업시간, 서비스, 가격, 위치 안내가 같은 기준으로 보입니까?",
+      options:[
+        {t:"어느 화면에서도 거의 같다", sev:0},
+        {t:"일부 표현만 다르다", sev:1},
+        {t:"오래된 정보가 섞여 있다", sev:2},
+        {t:"어디가 맞는지 확인이 필요하다", sev:3}
+      ]
+    },
+    {
+      dim:"flow", stageNo:"03", stageCode:"FLOW",
+      stageDesc:"다음 행동으로 잘 넘어가는지 확인 중",
+      q:"관심이 생긴 고객이 예약·전화·문의로 넘어갈 다음 행동을 바로 찾을 수 있습니까?",
+      options:[
+        {t:"한 번에 찾을 수 있다", sev:0},
+        {t:"조금 내려보면 찾을 수 있다", sev:1},
+        {t:"화면마다 경로가 다르다", sev:2},
+        {t:"어디로 문의해야 할지 애매하다", sev:3}
+      ]
+    },
+    {
+      dim:"trust", stageNo:"04", stageCode:"TRUST",
+      stageDesc:"마지막 망설임을 받쳐줄 근거가 있는지 확인 중",
+      q:"처음 보는 고객의 마지막 망설임을 줄일 리뷰, 답글, FAQ, 설명이 준비되어 있습니까?",
+      options:[
+        {t:"충분히 준비되어 있다", sev:0},
+        {t:"일부만 준비되어 있다", sev:1},
+        {t:"리뷰는 있지만 설명이 부족하다", sev:2},
+        {t:"고객이 직접 물어봐야 알 수 있다", sev:3}
+      ]
+    },
+    {
+      dim:"relation", stageNo:"05", stageCode:"RELATION",
+      stageDesc:"방문 이후 관계가 이어지는지 확인 중",
+      q:"방문 이후 고객이 다시 찾거나 추천할 이유가 온라인 화면에도 남아 있습니까?",
+      options:[
+        {t:"후기와 재방문 흐름이 이어진다", sev:0},
+        {t:"간헐적으로만 이어진다", sev:1},
+        {t:"방문 이후 관계는 따로 관리하지 않는다", sev:2},
+        {t:"확인해본 적이 없다", sev:3}
+      ]
+    }
+  ];
+
+  /* dimension → 결과 코드 */
+  var CODES = { impression:"S01", consistency:"S02", flow:"S03", trust:"S04", boost:"S05" };
+
+  /* 결과 본문 (점수·등급·경고 없이, 먼저 정리할 순서를 안내) */
+  var RESULTS = {
+    impression:{
+      type:"첫인상 간격형", tag:"검색 표면", icon:"visibility_off",
+      strength:"검색에서 처음 보이는 화면은 이미 존재합니다. 손님이 들어올 입구는 열려 있습니다.",
+      thought:"여기가 정확히 뭐 하는 곳이지?",
+      check:"대표사진과 첫 문장이 매장의 핵심을 1초 안에 전하고 있는지 확인합니다.",
+      priority:"대표 이미지와 첫 문장부터. 손님이 가장 먼저 보는 한 화면을 핵심이 읽히게 맞춥니다."
+    },
+    consistency:{
+      type:"정보 불일치형", tag:"신뢰 표면", icon:"sync_problem",
+      strength:"관심을 만들 정보는 여러 화면에 이미 올라가 있습니다.",
+      thought:"어디 정보가 맞는 거지? 바뀐 건 아닐까?",
+      check:"네이버·지도·홈페이지의 영업시간·서비스·가격·위치가 같은 기준으로 보이는지 확인합니다.",
+      priority:"가장 많이 보는 화면들의 기본 정보를 하나의 기준으로 맞춥니다."
+    },
+    flow:{
+      type:"이동 흐름 단절형", tag:"행동 표면", icon:"alt_route",
+      strength:"관심을 만들 첫 정보는 이미 자리 잡고 있습니다.",
+      thought:"괜찮아 보이는데, 어디로 물어보면 되지?",
+      check:"홈페이지·플레이스·카카오·전화가 서로 다른 길을 가리키고 있는지 확인합니다.",
+      priority:"가장 많이 유입되는 한 화면에서 문의·예약 경로를 하나로 정리합니다."
+    },
+    trust:{
+      type:"안심 근거 부족형", tag:"이해 표면", icon:"verified_user",
+      strength:"여기까지 온 손님은 이미 관심이 생긴 상태입니다.",
+      thought:"괜찮아 보이는데, 여기 믿어도 될까?",
+      check:"리뷰 답글·대표 소개·FAQ가 마지막 망설임을 받쳐주고 있는지 확인합니다.",
+      priority:"리뷰 답글과 대표 한마디부터. 망설이는 손님이 안심할 자리를 만듭니다."
+    },
+    boost:{
+      type:"부스트 준비형", tag:"운영 표면", icon:"rocket_launch",
+      strength:"기본 화면은 이미 잘 잡혀 있습니다. 검색·신뢰·흐름·근거가 고르게 준비된 상태예요.",
+      thought:"정보도 후기도 정리돼 있네, 한번 가볼까?",
+      check:"지금은 더 많이 보여줄 준비가 된 상태입니다. 흩어진 화면을 한 흐름으로 잇는 지점을 확인합니다.",
+      priority:"흩어진 화면을 한 흐름으로 잇고, 그다음 노출을 늘리는 순서로."
+    }
+  };
+
+  var RELATION_NOTE = "특히 방문 이후 다시 찾거나 추천할 이유가 온라인에 거의 남아 있지 않습니다. 후기·재방문·추천이 이어질 자리를 함께 점검하면 좋습니다.";
+
+  /* ============================================================
+     상태
+     ============================================================ */
+  var state = {
+    step:0,
+    severity:{ impression:0, consistency:0, flow:0, trust:0, relation:0 },
+    answers:[],
+    complete:false, resultKey:null, resultCode:null, isRelation:false,
+    reviewInterest:"",
+    startedAt:null, completedAt:null,
+    submitted:false, ended:false, locking:false,
+    lastPayload:null
+  };
+
+  var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  var fired = {};
+  var cdTimer = null;
+
+  /* ============================================================
+     유틸
+     ============================================================ */
+  function $(s){ return document.querySelector(s); }
+  function $all(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); }
+  function show(el){ if(el) el.classList.remove("is-hidden"); }
+  function hide(el){ if(el) el.classList.add("is-hidden"); }
+  function setTxt(sel,v){ var el=$(sel); if(el) el.textContent=(v===undefined||v===null||v==="")?"—":v; }
+  function scrollToEl(sel){ var el=$(sel); if(el) el.scrollIntoView({behavior: RM?"auto":"smooth", block:"start"}); }
+  function hasPlaceholder(v){ return typeof v==="string" && v.indexOf("PLACEHOLDER")!==-1; }
+
+  /* ---- 분석 이벤트 (SDK 없어도 무오류) ---- */
+  function baseParams(){
+    return {
+      campaign_id: CONFIG.CAMPAIGN_ID,
+      anonymous_case_id: (CONFIG.CASE && CONFIG.CASE.anonymousCaseId) || "",
+      offer_active: (!state.ended && endTime!==null)
+    };
+  }
+  function track(name, data){
+    var payload = Object.assign(baseParams(), data||{});
+    try{
+      if(typeof window.dataLayer!=="undefined" && window.dataLayer.push){ window.dataLayer.push(Object.assign({event:name}, payload)); }
+      if(typeof window.gtag==="function"){ window.gtag("event", name, payload); }
+      if(typeof window.fbq==="function"){ window.fbq("trackCustom", name, payload); }
+    }catch(e){}
+    if(window.console && console.debug){ console.debug("[track]", name, payload); }
+  }
+  function trackOnce(name, data){ if(fired[name]) return; fired[name]=true; track(name, data); }
+
+  /* ---- UTM ---- */
+  function captureUTM(){
+    try{
+      var q = new URLSearchParams(window.location.search);
+      var keys=["utm_source","utm_medium","utm_campaign","utm_content","utm_term"];
+      var found=false, store={};
+      keys.forEach(function(k){ var v=q.get(k); if(v){ store[k]=v; found=true; } });
+      if(found){ sessionStorage.setItem("wp_utm", JSON.stringify(store)); }
+    }catch(e){}
+  }
+  function readUTM(){
+    try{ var raw=sessionStorage.getItem("wp_utm"); return raw?JSON.parse(raw):{}; }catch(e){ return {}; }
+  }
+
+  /* ============================================================
+     카운트다운 (invalid-date 가드)
+     ============================================================ */
+  var endTime = (function(){
+    var t = new Date(CONFIG.CAMPAIGN_END).getTime();
+    return isNaN(t) ? null : t;
+  })();
+
+  function setCd(k, val){
+    var el = document.querySelector('[data-cd="'+k+'"]');
+    if(el) el.textContent = (val<10?"0":"")+val;
+  }
+  function hideCountdown(){
+    hide($("#countdown-wrap"));
+    if(cdTimer){ clearInterval(cdTimer); cdTimer=null; }
+  }
+  function renderCountdown(){
+    if(endTime===null){ hideCountdown(); return; }      // placeholder/invalid → 숨김(일반 진단 상태)
+    var diff = endTime - Date.now();
+    if(diff<=0){ if(!state.ended) enterEndedState(); return; }
+    var s=Math.floor(diff/1000), h=Math.floor(s/3600), m=Math.floor((s%3600)/60), sec=s%60;
+    setCd("h",h); setCd("m",m); setCd("s",sec);
+  }
+  function enterEndedState(){
+    state.ended = true;
+    var cd=$("#countdown"); if(cd){ cd.innerHTML='<span class="text-on-surface-variant">초대 종료</span>'; }
+    var label=$("#countdown-label"); if(label){ label.textContent="PRIVATE 72"; }
+    hide($("#offer-benefit")); show($("#offer-ended"));
+    var badge=$("#hero-badge");
+    if(badge){ badge.innerHTML='<span class="material-symbols-outlined text-[16px] mr-1">history</span> 이번 초대는 종료되었습니다'; }
+    if(!state.submitted && !state.complete){ setNavRight("결과 해석","arrow_forward"); }
+    trackOnce("campaign_expired_view");
+    if(cdTimer){ clearInterval(cdTimer); cdTimer=null; }
+  }
+
+  /* ============================================================
+     진단 렌더링
+     ============================================================ */
+  function renderQuestion(){
+    var item = QUESTIONS[state.step];
+    var code=$("#q-stage-code"), desc=$("#q-stage-desc"), prog=$("#q-progress"), fill=$("#prog-fill"), qt=$("#q-text"), opts=$("#q-options");
+    if(code) code.textContent = item.stageNo+" "+item.stageCode;
+    if(desc) desc.textContent = item.stageDesc;
+    if(prog) prog.textContent = "Q"+(state.step+1)+" / "+QUESTIONS.length;
+    if(fill) fill.style.width = Math.round(((state.step+1)/QUESTIONS.length)*100)+"%";
+    if(qt) qt.textContent = item.q;
+    if(!opts) return;
+    opts.innerHTML = "";
+    item.options.forEach(function(opt, idx){
+      var b=document.createElement("button");
+      b.type="button";
+      b.className="w-full text-left p-4 rounded-lg border border-outline-variant hover:border-primary hover:bg-primary/5 transition-all flex items-center justify-between";
+      b.innerHTML='<span class="font-body-md text-body-md text-on-surface-variant">'+opt.t+'</span>'+
+                  '<span class="material-symbols-outlined text-outline-variant">chevron_right</span>';
+      b.addEventListener("click", function(){ onAnswer(idx, opt.sev); });
+      opts.appendChild(b);
+    });
+  }
+
+  function fadeOut(el, cb){ if(!el){ cb(); return; } if(RM){ cb(); return; } el.classList.add("is-out"); setTimeout(cb, 380); }
+  function fadeIn(el){ if(!el) return; if(RM){ el.classList.remove("is-out"); return; } requestAnimationFrame(function(){ el.classList.remove("is-out"); }); }
+
+  function onAnswer(optIndex, sev){
+    if(state.locking) return;
+    state.locking = true;
+
+    var item = QUESTIONS[state.step];
+    if(state.answers.length===0){
+      state.startedAt = new Date().toISOString();
+      trackOnce("diagnosis_start", { first_dimension:item.dim });
+    }
+    state.severity[item.dim] = sev;
+    state.answers.push({ question_id:"Q"+(state.step+1), dimension:item.dim, answer_id:optIndex, severity:sev });
+    track("diagnosis_answer", { question_id:"Q"+(state.step+1), answer_id:optIndex, severity:sev });
+
+    var isLast = (state.step === QUESTIONS.length-1);
+    var card=$("#q-card");
+
+    if(!isLast){
+      var done = item.stageCode, next = QUESTIONS[state.step+1].stageCode;
+      fadeOut(card, function(){
+        card.innerHTML =
+          '<div class="flex items-center gap-3 py-2">'+
+          '<span class="material-symbols-outlined text-primary" style="font-variation-settings:\'FILL\' 1;">check_circle</span>'+
+          '<div><p class="font-body-md text-body-md text-on-surface">'+done+' 확인 완료</p>'+
+          '<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">다음은 '+next+'입니다</p></div></div>';
+        fadeIn(card);
+        var hold = RM ? 0 : 720;
+        setTimeout(function(){
+          fadeOut(card, function(){
+            card.innerHTML =
+              '<h3 id="q-text" class="font-body-lg text-body-lg text-on-surface mb-6"></h3>'+
+              '<div id="q-options" class="flex flex-col gap-3"></div>';
+            state.step++;
+            renderQuestion();
+            fadeIn(card);
+            state.locking = false;
+          });
+        }, hold);
+      });
+    } else {
+      fadeOut(card, function(){
+        var code=$("#q-stage-code"), desc=$("#q-stage-desc"), prog=$("#q-progress"), fill=$("#prog-fill");
+        if(code) code.textContent="COMPLETE";
+        if(desc) desc.textContent="진단이 끝났습니다";
+        if(prog) prog.textContent="완료";
+        if(fill) fill.style.width="100%";
+        card.innerHTML =
+          '<div class="flex items-center justify-between">'+
+          '<div class="flex items-center gap-3"><span class="material-symbols-outlined text-primary" style="font-variation-settings:\'FILL\' 1;">task_alt</span>'+
+          '<p class="font-body-md text-body-md text-on-surface">진단 완료 · 결과를 아래에서 확인하세요</p></div>'+
+          '<button type="button" data-action="goto-result" class="font-label-sm text-label-sm text-primary shrink-0">결과 보기</button></div>';
+        fadeIn(card);
+        completeDiagnosis();
+        state.locking = false;
+      });
+    }
+  }
+
+  /* 결과 계산: 최고 severity dimension, 동점 시 여정 앞단, relation→trust(+note), 모두 낮으면 boost */
+  function decide(){
+    var sev = state.severity;
+    var order = ["impression","consistency","flow","trust","relation"];
+    var max = Math.max(sev.impression, sev.consistency, sev.flow, sev.trust, sev.relation);
+    if(max <= 1){ return { key:"boost", relation:false }; }
+    var winner = null;
+    for(var i=0;i<order.length;i++){ if(sev[order[i]]===max){ winner=order[i]; break; } }
+    if(winner==="relation"){ return { key:"trust", relation:true }; }
+    return { key:winner, relation:false };
+  }
+
+  function completeDiagnosis(){
+    state.complete = true;
+    state.completedAt = new Date().toISOString();
+
+    var d = decide();
+    state.resultKey = d.key;
+    state.resultCode = CODES[d.key];
+    state.isRelation = d.relation;
+    var r = RESULTS[d.key];
+
+    hide($("#result-placeholder"));
+    show($("#result-card"));
+    var ic=$("#result-icon"); if(ic) ic.textContent = r.icon;
+    setTxt("#result-code", "RESULT CODE · "+state.resultCode);
+    setTxt("#result-type", r.type);
+    setTxt("#result-tag", r.tag);
+    setTxt("#result-strength", r.strength);
+    setTxt("#result-thought", "“"+r.thought+"”");
+    setTxt("#result-check", r.check);
+    setTxt("#result-priority", r.priority);
+    var rel=$("#result-relation");
+    if(rel){ if(d.relation){ rel.textContent=RELATION_NOTE; show(rel); } else { hide(rel); } }
+
+    show($("#followup"));
+
+    setNavLeft("내 결과","description");
+    if(!state.submitted){ setNavRight("실제 화면 확인","arrow_forward"); }
+
+    trackOnce("diagnosis_complete", { result_type:r.type, result_code:state.resultCode });
+    trackOnce("result_view", { result_type:r.type, result_code:state.resultCode });
+    scrollToEl("#result-section");
+  }
+
+  function restart(){
+    state.step=0;
+    state.severity={ impression:0, consistency:0, flow:0, trust:0, relation:0 };
+    state.answers=[];
+    state.complete=false; state.resultKey=null; state.resultCode=null; state.isRelation=false;
+    state.reviewInterest=""; state.startedAt=null; state.completedAt=null; state.locking=false;
+
+    $all("[data-fu]").forEach(function(b){ b.classList.remove("opt-pick"); var i=b.querySelector(".opt-ico"); if(i) i.textContent="radio_button_unchecked"; });
+    hide($("#followup"));
+    hide($("#result-card"));
+    show($("#result-placeholder"));
+
+    var card=$("#q-card");
+    if(card){
+      card.classList.remove("is-out");
+      card.innerHTML =
+        '<h3 id="q-text" class="font-body-lg text-body-lg text-on-surface mb-6"></h3>'+
+        '<div id="q-options" class="flex flex-col gap-3"></div>';
+    }
+    fired["diagnosis_start"]=false; fired["diagnosis_complete"]=false; fired["result_view"]=false;
+    renderQuestion();
+
+    setNavLeft("1분 진단","troubleshoot");
+    if(!state.submitted){ setNavRight("결과 해석","arrow_forward"); }
+    scrollToEl("#diagnosis");
+  }
+
+  /* 선택형 추가질문 (review_interest) — 결과 계산 제외, 단일 선택, 선택 안 해도 진행 */
+  function pickFollowup(btn){
+    var val = btn.getAttribute("data-fu");
+    $all("[data-fu]").forEach(function(b){
+      b.classList.remove("opt-pick");
+      var i=b.querySelector(".opt-ico"); if(i) i.textContent="radio_button_unchecked";
+    });
+    btn.classList.add("opt-pick");
+    var ic=btn.querySelector(".opt-ico"); if(ic) ic.textContent="radio_button_checked";
+    state.reviewInterest = val;
+  }
+
+  /* ============================================================
+     사례 · 오퍼 렌더 (검증/값 게이팅)
+     ============================================================ */
+  function isPlaceholder(v){ return typeof v==="string" && v.indexOf("PLACEHOLDER")!==-1; }
+  function condVal(v){ return (!v || isPlaceholder(v)) ? "확인 후 반영" : v; }
+  function stripNum(v){ return v ? String(v).replace(/[^\d,]/g,"") : ""; }
+  function caseParams(){
+    var c = CONFIG.CASE || {};
+    return {
+      metric_name: c.metricName || "",
+      before_value: c.beforeValue || "",
+      after_value: c.afterValue || "",
+      increase_pct: c.increasePct || ""
+    };
+  }
+  function fillCase(){
+    var c = CONFIG.CASE || {};
+    var nameEl=$("#case-name"); if(nameEl && c.publicName){ nameEl.textContent = c.publicName; }
+    if(c.verified===true){
+      hide($("#case-unverified"));
+      show($("#case-numbers")); show($("#case-conditions"));
+      setTxt("#cn-metric", c.metricName);
+      setTxt("#cn-before", stripNum(c.beforeValue));
+      setTxt("#cn-after", stripNum(c.afterValue));
+      setTxt("#cn-count", c.increaseCount ? ("+"+String(c.increaseCount).replace(/^\+/,"")+" 증가") : "—");
+      setTxt("#cn-pct", c.increasePct);
+      setTxt("#cc-period", condVal(c.measurementPeriod));
+      setTxt("#cc-basis", condVal(c.comparisonMethod));
+      setTxt("#cc-adspend", condVal(c.adSpendIncluded));
+    } else {
+      hide($("#case-numbers")); hide($("#case-conditions"));
+      show($("#case-unverified"));
+    }
+  }
+  function fillHeroProof(){
+    var c = CONFIG.CASE || {};
+    var strip=$("#hero-proof");
+    if(c.verified!==true){ if(strip){ hide(strip); } return; }   // 검증된 수치만 Hero 노출
+    setTxt("#hp-metric", c.metricName);
+    setTxt("#hp-before", stripNum(c.beforeValue));
+    setTxt("#hp-after", stripNum(c.afterValue));
+    setTxt("#hp-pct", c.increasePct);
+  }
+  function fillOffer(){
+    var o = CONFIG.OFFER || {};
+    var ul=$("#offer-details"); if(!ul) return;
+    var rows=[];
+    if(o.vatIncluded===true) rows.push("표기 금액 VAT 포함");
+    else if(o.vatIncluded===false) rows.push("표기 금액 VAT 별도");
+    if(o.eligibleProducts) rows.push("적용 범위 · "+o.eligibleProducts);
+    if(o.stackable===true) rows.push("다른 혜택과 중복 적용 가능");
+    if(o.realDeadline) rows.push("보존 마감 · "+o.realDeadline);
+    if(rows.length){
+      ul.innerHTML = rows.map(function(t){ return '<li class="font-label-sm text-label-sm text-on-surface-variant">· '+t+'</li>'; }).join("");
+      show(ul);
+    } else { hide(ul); }
+  }
+
+  /* ============================================================
+     하단 내비 라벨
+     ============================================================ */
+  function setNavLeft(label, ico){
+    var l=$("#nav-left-label"), i=$("#nav-left-ico");
+    if(l) l.textContent=label; if(i) i.textContent=ico;
+  }
+  function setNavRight(label, ico){
+    var l=$("#nav-right-label"), i=$("#nav-right-ico");
+    if(l) l.textContent=label; if(i) i.textContent=ico;
+  }
+
+  /* ============================================================
+     폼 · 검증 · 전송 · 카카오 fallback
+     ============================================================ */
+  function showError(msg){
+    var e=$("#f-error"); if(!e) return;
+    e.textContent=msg; show(e);
+  }
+  function clearError(){ var e=$("#f-error"); if(e){ e.textContent=""; hide(e); } }
+
+  function validate(){
+    clearError();
+    var store=($("#f-store").value||"").trim();
+    var region=($("#f-region").value||"").trim();
+    var category=($("#f-category").value||"").trim();
+    var method=($("#f-method").value||"").trim();
+    var contact=($("#f-contact").value||"").trim();
+    var consent=$("#f-consent").checked;
+
+    if(!store){ showError("매장명을 입력해 주세요."); $("#f-store").focus(); return null; }
+    if(!region){ showError("지역을 입력해 주세요."); $("#f-region").focus(); return null; }
+    if(!method){ showError("연락 방식을 선택해 주세요."); $("#f-method").focus(); return null; }
+    if(!contact){ showError("연락처 또는 카카오 ID를 입력해 주세요."); $("#f-contact").focus(); return null; }
+    if(!consent){ showError("정보 수집·이용에 동의해 주세요."); return null; }
+
+    return { store:store, region:region, category:category, method:method, contact:contact };
+  }
+
+  function collectPayload(base){
+    var r = state.resultKey ? RESULTS[state.resultKey] : null;
+    var payload = {
+      campaign_id: CONFIG.CAMPAIGN_ID,
+      anonymous_case_id: (CONFIG.CASE && CONFIG.CASE.anonymousCaseId) || "",
+      store: base.store,
+      region: base.region,
+      category: base.category,
+      method: base.method,
+      contact: base.contact,
+      result_type: r ? r.type : "",
+      result_code: state.resultCode || "",
+      answers: state.answers,
+      severity: state.severity,
+      review_interest: state.reviewInterest || "",
+      diagnosis_started_at: state.startedAt || "",
+      diagnosis_completed_at: state.completedAt || "",
+      offer_active: (!state.ended && endTime!==null),
+      referrer: document.referrer || "",
+      submitted_at: new Date().toISOString()
+    };
+    return Object.assign(payload, readUTM());
+  }
+
+  function payloadToText(p){
+    var lines = [
+      "[WEPLACE PRIVATE 72 결과 해석 신청]",
+      "매장명: "+p.store,
+      "지역: "+p.region,
+      "업종: "+(p.category||"-"),
+      "연락 방식: "+p.method,
+      "연락처: "+p.contact,
+      "진단 결과: "+(p.result_type||"-")+" ("+(p.result_code||"-")+")",
+      "먼저 보고 싶은 곳: "+(p.review_interest||"-"),
+      "캠페인: "+p.campaign_id
+    ];
+    return lines.join("\n");
+  }
+
+  function setSubmitting(on){
+    var b=$("#f-submit"); if(!b) return;
+    b.disabled = on;
+    b.textContent = on ? "전송 중…" : "결과 해석 미팅 열기";
+  }
+
+  function submitForm(){
+    var base = validate();
+    if(!base) return;
+
+    var payload = collectPayload(base);
+    state.lastPayload = payload;
+    state.submitted = true;
+
+    track("lead_submit", {
+      result_type: payload.result_type, result_code: payload.result_code,
+      review_interest: payload.review_interest, method: payload.method
+    });
+
+    var hasEndpoint = CONFIG.FORM_ENDPOINT && !hasPlaceholder(CONFIG.FORM_ENDPOINT);
+    if(!hasEndpoint){
+      track("lead_submit_failed", { reason:"endpoint_unset" });
+      showFallback("아직 자동 전송이 연결되지 않았습니다.");
+      return;
+    }
+
+    setSubmitting(true);
+    fetch(CONFIG.FORM_ENDPOINT, {
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify(payload)
+    }).then(function(res){
+      setSubmitting(false);
+      if(res && res.ok){ showSuccess(false); }
+      else { track("lead_submit_failed", { reason:"http_"+(res?res.status:"err") }); showFallback("전송이 원활하지 않습니다."); }
+    }).catch(function(){
+      setSubmitting(false);
+      track("lead_submit_failed", { reason:"network" });
+      showFallback("전송이 원활하지 않습니다.");
+    });
+  }
+
+  function showFallback(prefix){
+    hide($("#form-wrap"));
+    show($("#form-fallback"));
+    var fm=$("#fallback-msg");
+    if(fm){
+      fm.textContent = (prefix? prefix+" " : "") + "입력하신 내용은 그대로 남아 있습니다. 아래 버튼을 누르면 내용을 복사해 카카오톡으로 보낼 수 있습니다.";
+    }
+  }
+
+  function backToForm(){
+    hide($("#form-fallback"));
+    show($("#form-wrap"));
+    state.submitted = false;        // 재시도 허용
+  }
+
+  function copyText(text){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      return navigator.clipboard.writeText(text).catch(function(){ return legacyCopy(text); });
+    }
+    return legacyCopy(text);
+  }
+  function legacyCopy(text){
+    return new Promise(function(resolve){
+      try{
+        var ta=document.createElement("textarea");
+        ta.value=text; ta.setAttribute("readonly",""); ta.style.position="absolute"; ta.style.left="-9999px";
+        document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta);
+      }catch(e){}
+      resolve();
+    });
+  }
+
+  /* 카카오 fallback: 사용자의 버튼 클릭(제스처) 내부에서만 복사 + 이동. 자동 window.open 없음. */
+  function onKakaoFallback(){
+    var p = state.lastPayload;
+    var text = p ? payloadToText(p) : "[WEPLACE PRIVATE 72 결과 해석 신청]";
+    copyText(text).then(function(){
+      track("kakao_fallback", { result_code: state.resultCode || "" });
+      if(CONFIG.KAKAO_LINK && !hasPlaceholder(CONFIG.KAKAO_LINK)){
+        window.open(CONFIG.KAKAO_LINK, "_blank", "noopener");
+      }
+      showSuccess(true);
+    });
+  }
+
+  function showSuccess(viaKakao){
+    hide($("#form-wrap"));
+    hide($("#form-fallback"));
+    show($("#form-success"));
+    var msg=$("#success-msg");
+    if(msg){
+      msg.innerHTML = viaKakao
+        ? '입력하신 내용을 복사했습니다. 열린 카카오톡 창에 <strong class="text-on-surface">붙여넣기</strong> 후 보내주시면 접수됩니다.'
+        : "영업일 기준 하루 안에, 실제 화면을 함께 볼 수 있는 방식으로 연락드립니다.";
+    }
+    setNavRight("접수 완료","check_circle");
+    var nav=$("#nav-right"); if(nav){ nav.disabled=true; }
+  }
+
+  /* ============================================================
+     이벤트 바인딩
+     ============================================================ */
+  function bindActions(){
+    document.addEventListener("click", function(e){
+      var fu = e.target.closest && e.target.closest("[data-fu]");
+      if(fu){ pickFollowup(fu); return; }
+
+      var t = e.target.closest && e.target.closest("[data-action]");
+      if(!t) return;
+      var a = t.getAttribute("data-action");
+      if(a==="goto-diagnosis"){ scrollToEl("#diagnosis"); }
+      else if(a==="goto-result"){ scrollToEl("#result-section"); }
+      else if(a==="goto-form"){ scrollToEl("#form-section"); }
+      else if(a==="meeting"){ track("meeting_cta_click", { result_code: state.resultCode || "" }); scrollToEl("#form-section"); }
+      else if(a==="hero-proof"){ track("hero_proof_click", caseParams()); scrollToEl("#case"); }
+      else if(a==="nav-left"){ scrollToEl(state.complete ? "#result-section" : "#diagnosis"); }
+      else if(a==="nav-right"){ if(!state.submitted){ scrollToEl("#form-section"); } }
+      else if(a==="restart"){ restart(); }
+    });
+
+    var submit=$("#f-submit"); if(submit){ submit.addEventListener("click", submitForm); }
+    var fbk=$("#fallback-kakao"); if(fbk){ fbk.addEventListener("click", onKakaoFallback); }
+    var fbb=$("#fallback-back"); if(fbb){ fbb.addEventListener("click", backToForm); }
+
+    // form_start: 첫 입력 1회
+    ["#f-store","#f-region","#f-category","#f-contact"].forEach(function(sel){
+      var el=$(sel); if(el){ el.addEventListener("input", function(){ trackOnce("form_start"); }); }
+    });
+    ["#f-method"].forEach(function(sel){ var el=$(sel); if(el){ el.addEventListener("change", function(){ trackOnce("form_start"); }); } });
+    var consent=$("#f-consent"); if(consent){ consent.addEventListener("change", function(){ trackOnce("form_start"); }); }
+  }
+
+  /* 노출 이벤트 (Hero proof / 사례 / 오퍼) + 숫자 장면 절제된 fade */
+  function revealNumbers(){ var el=$("#case-numbers"); if(el){ el.classList.remove("is-out"); } }
+  function observeViews(){
+    var caseNumEl=$("#case-numbers");
+    if(caseNumEl && !RM){ caseNumEl.classList.add("is-out"); }   // reduced motion이면 즉시 노출(가림 없음)
+    if(!("IntersectionObserver" in window)){
+      trackOnce("hero_proof_view", caseParams());
+      trackOnce("case_view", caseParams());
+      trackOnce("offer_view");
+      revealNumbers();
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(!en.isIntersecting) return;
+        var id = en.target.id;
+        if(id==="hero-proof"){ trackOnce("hero_proof_view", caseParams()); }
+        else if(id==="case"){ trackOnce("case_view", caseParams()); }
+        else if(id==="offer"){ trackOnce("offer_view"); }
+        else if(id==="case-numbers"){ revealNumbers(); }
+        io.unobserve(en.target);
+      });
+    }, { threshold:0.4 });
+    ["#hero-proof","#case","#offer","#case-numbers"].forEach(function(sel){ var el=$(sel); if(el){ io.observe(el); } });
+  }
+
+  /* ============================================================
+     init
+     ============================================================ */
+  function init(){
+    captureUTM();
+    fillCase();
+    fillHeroProof();
+    fillOffer();
+    renderQuestion();
+    bindActions();
+    observeViews();
+    renderCountdown();
+    if(endTime!==null){ cdTimer = setInterval(renderCountdown, 1000); }
+    trackOnce("landing_view");
+  }
+
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded", init); }
+  else { init(); }
+
+})();
+</script>
+</body></html>
