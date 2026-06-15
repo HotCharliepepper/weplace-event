@@ -1040,14 +1040,18 @@
     }
 
     setSubmitting(true);
+    // Apps Script는 CORS preflight를 처리하지 못하므로
+    // no-cors + FormData 방식으로 전송 (응답 읽기 불가 → 전송 자체를 성공으로 처리)
+    var form = new FormData();
+    form.append("payload", JSON.stringify(payload));
+
     fetch(CONFIG.FORM_ENDPOINT, {
-      method:"POST",
-      headers:{ "Content-Type":"application/json" },
-      body: JSON.stringify(payload)
-    }).then(function(res){
+      method: "POST",
+      mode: "no-cors",
+      body: form
+    }).then(function(){
       setSubmitting(false);
-      if(res && res.ok){ showSuccess(false); }
-      else { track("lead_submit_failed", { reason:"http_"+(res?res.status:"err") }); showFallback("전송이 원활하지 않습니다."); }
+      showSuccess(false);  // no-cors는 응답 못 읽음 → 전송 완료로 처리
     }).catch(function(){
       setSubmitting(false);
       track("lead_submit_failed", { reason:"network" });
