@@ -1,0 +1,35 @@
+# netlify.toml — weplace-private72.netlify.app
+
+[build]
+  publish = "."
+
+# 단일 HTML — 루트 이외 경로 접근 시 index.html 서빙
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
+
+# HTML — 항상 최신본 확인
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control           = "public, max-age=0, must-revalidate"
+    X-Frame-Options         = "DENY"
+    X-Content-Type-Options  = "nosniff"
+    Referrer-Policy         = "strict-origin-when-cross-origin"
+
+# 이미지 — 파일명 변경 시 immutable 처리
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
