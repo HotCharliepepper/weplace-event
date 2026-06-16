@@ -179,24 +179,25 @@
   .sl-ico{ width:28px; height:28px; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; background:rgba(166,129,59,.14); color:#caa44e; }
   .sl-ico .material-symbols-outlined{ font-size:17px; }
   .sl-label{ font-size:14.5px; line-height:1.4; letter-spacing:-0.005em; color:#ddd8d3; }
-  /* ============ 스크롤 연동 Before/After 스크럽 (네이버 전후) ============ */
-  .scrub{ position:relative; width:100%; aspect-ratio:4/5; border-radius:16px; overflow:hidden; border:1px solid rgba(255,255,255,.08); background:#201f1f; --pos:100%; user-select:none; box-shadow:0 24px 50px -30px rgba(0,0,0,.6); }
-  .scrub__img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; pointer-events:none; }
+  /* ============ Before/After 슬라이더 (드래그 + 스크롤 절반 자동) ============ */
+  .scrub{ position:relative; width:100%; aspect-ratio:4/5; border-radius:16px; overflow:hidden; border:1px solid rgba(255,255,255,.08); background:#201f1f; --pos:50%; user-select:none; -webkit-user-select:none; touch-action:pan-y; box-shadow:0 24px 50px -30px rgba(0,0,0,.6); cursor:ew-resize; }
+  .scrub__img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; pointer-events:none; -webkit-user-drag:none; }
   .scrub__after{ filter:saturate(1.04) brightness(1.02); }
   /* before(정리 전)를 왼쪽부터 덮음 → pos가 줄수록 after가 드러남 */
-  .scrub__before{ clip-path:inset(0 calc(100% - var(--pos,100%)) 0 0); }
-  .scrub__line{ position:absolute; top:0; bottom:0; left:var(--pos,100%); width:2px; background:#A6813B; transform:translateX(-50%); box-shadow:0 0 16px rgba(166,129,59,.7); pointer-events:none; z-index:2; }
-  .scrub__grip{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:34px; height:34px; border-radius:50%; background:rgba(20,19,19,.85); border:1.5px solid #A6813B; display:flex; align-items:center; justify-content:center; color:#caa44e; box-shadow:0 6px 18px -6px rgba(0,0,0,.6); }
-  .scrub__grip .material-symbols-outlined{ font-size:18px; }
+  .scrub__before{ clip-path:inset(0 calc(100% - var(--pos,50%)) 0 0); }
+  .scrub__line{ position:absolute; top:0; bottom:0; left:var(--pos,50%); width:2px; background:#A6813B; transform:translateX(-50%); box-shadow:0 0 16px rgba(166,129,59,.7); pointer-events:none; z-index:2; }
+  .scrub__grip{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:42px; height:42px; border-radius:50%; background:rgba(20,19,19,.9); border:1.5px solid #A6813B; display:flex; align-items:center; justify-content:center; color:#caa44e; box-shadow:0 6px 18px -6px rgba(0,0,0,.6); transition:transform .15s ease; }
+  .scrub.is-dragging .scrub__grip{ transform:translate(-50%,-50%) scale(1.12); }
+  .scrub.is-dragging{ cursor:grabbing; }
+  .scrub__grip .material-symbols-outlined{ font-size:22px; }
   .scrub__tag{ position:absolute; top:12px; z-index:3; font-family:'Manrope',sans-serif; font-size:10.5px; letter-spacing:.06em; font-weight:600; padding:5px 11px; border-radius:9999px; -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); pointer-events:none; }
   .scrub__tag--l{ left:12px; background:rgba(20,19,19,.6); color:#cfc5bc; border:1px solid rgba(255,255,255,.12); }
   .scrub__tag--r{ right:12px; background:linear-gradient(90deg,#8a6a30,#A6813B); color:#fff; }
   .scrub__hint{ margin-top:14px; text-align:center; font-size:12.5px; line-height:1.6; letter-spacing:.02em; color:#a39d97; }
   .scrub__hint .material-symbols-outlined{ font-size:15px; vertical-align:middle; color:#caa44e; }
-  /* reduced motion: 스크럽 비활성 → 정리 후(0%)로 고정 노출 */
+  /* reduced motion: 드래그는 가능하되 스크롤 자동 이동만 비활성 (절반 고정 시작) */
   @media (prefers-reduced-motion: reduce){
-    .scrub{ --pos:0% !important; }
-    .scrub__line, .scrub__grip{ display:none; }
+    .scrub__grip{ transition:none; }
   }
   /* select 화살표 */
   select.input-diagnostic{ -webkit-appearance:none; appearance:none;
@@ -296,7 +297,7 @@
 <div class="wc-fallback"><span class="wc-label"></span></div>
 </div>
 <div class="wc-body">
-<div><span class="wc-label">01 · First Impression</span><p class="wc-label-sub">대표사진과 첫 문장에서 매장의 핵심을 찾는 순간</p></div>
+<div><span class="wc-label"></span><p class="wc-label-sub">대표사진과 첫 문장에서 매장의 핵심을 찾는 순간</p></div>
 <p class="wc-think">괜찮아 보이는데,<br/>정확히 어떤 곳이지?</p>
 </div>
 </div>
@@ -309,7 +310,7 @@
 <div class="wc-fallback"><span class="wc-label"></span></div>
 </div>
 <div class="wc-body">
-<div><span class="wc-label">02 · Consistency</span><p class="wc-label-sub">플레이스와 다른 화면의 정보가 같은 기준인지 확인하는 순간</p></div>
+<div><span class="wc-label"></span><p class="wc-label-sub">플레이스와 다른 화면의 정보가 같은 기준인지 확인하는 순간</p></div>
 <p class="wc-think">사진은 좋아 보이는데,<br/>지금 매장 모습이 맞나?</p>
 </div>
 </div>
@@ -322,7 +323,7 @@
 <div class="wc-fallback"><span class="wc-label"></span></div>
 </div>
 <div class="wc-body">
-<div><span class="wc-label">03 · Trust</span><p class="wc-label-sub">리뷰·답글·FAQ에서 마지막 안심 근거를 찾는 순간</p></div>
+<div><span class="wc-label"></span><p class="wc-label-sub">리뷰·답글·FAQ에서 마지막 안심 근거를 찾는 순간</p></div>
 <p class="wc-think">후기는 많은데,<br/>내가 궁금한 내용은 없네.</p>
 </div>
 </div>
@@ -335,7 +336,7 @@
 <div class="wc-fallback"><span class="wc-label"></span></div>
 </div>
 <div class="wc-body">
-<div><span class="wc-label">04 · Flow</span></div>
+<div><span class="wc-label"></span></div>
 <p class="wc-think">어디로 물어봐야 하지?<br/>일단 다른 곳도 볼까.</p>
 <p class="wc-desc">손님은 매장이 싫어서 나간 것이 아니라, 이해하기 전에 멈춘 것일 수 있습니다.</p>
 </div>
@@ -349,7 +350,7 @@
 <div class="wc-fallback"><span class="wc-label"></span></div>
 </div>
 <div class="wc-body">
-<div><span class="wc-label">05 · Next Step</span></div>
+<div><span class="wc-label"></span></div>
 <p class="wc-think">그럼, 대표님 매장은<br/>어느 화면에서 멈추고 있을까요?</p>
 <p class="wc-desc">1분 안에 먼저 확인해보세요.</p>
 </div>
@@ -527,24 +528,27 @@
 <span class="font-label-sm text-label-sm text-muted-gold uppercase tracking-widest block" style="margin-bottom:4px;">Before / After</span>
 <span class="font-label-sm text-label-sm text-on-surface-variant">고객이 보는 순서가 어떻게 바뀌었는지 보세요.</span>
 </div>
-<div id="surface-scrub" class="scrub" role="img" aria-label="네이버 대표 화면 정리 전후 비교">
+<div id="surface-scrub" class="scrub" role="slider" aria-label="네이버 대표 화면 정리 전후 비교" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0">
 <img class="scrub__img scrub__after" src="/images/case-surface-after.webp" alt="정리 후: 고객이 이해하는 순서" loading="lazy" onerror="this.style.opacity='0'"/>
 <img class="scrub__img scrub__before" src="/images/case-surface-before.webp" alt="정리 전: 고객이 지금 보는 순서" loading="lazy" onerror="this.style.opacity='0'"/>
-<div class="scrub__line"><div class="scrub__grip"><span class="material-symbols-outlined">chevron_right</span></div></div>
+<div class="scrub__line"><div class="scrub__grip"><span class="material-symbols-outlined">code</span></div></div>
 <span class="scrub__tag scrub__tag--l">지금</span>
 <span class="scrub__tag scrub__tag--r">정리 후</span>
 </div>
-<p class="scrub__hint">스크롤하면 — 지금 보는 순서가 고객이 이해하는 순서로 채워집니다 <span class="material-symbols-outlined">keyboard_double_arrow_down</span></p>
+<p class="scrub__hint">손잡이를 좌우로 끌어 비교해보세요 <span class="material-symbols-outlined">swipe</span></p>
 </div>
 
 <!-- Weplace 정리 노트 (정적) -->
-<div class="bg-surface border border-outline-variant/30 rounded-xl p-6">
+<div class="bg-surface border border-outline-variant/30 rounded-xl overflow-hidden">
+<img src="/images/case-surface-note.webp" alt="Weplace 정리 노트: 첫 세 장 배치" class="w-full block" style="aspect-ratio:4/5; object-fit:cover; border-bottom:1px solid rgba(255,255,255,.06);" loading="lazy" onerror="this.style.display='none'"/>
+<div class="p-6">
 <span class="font-label-sm text-label-sm text-muted-gold uppercase tracking-widest block mb-3">Weplace Note</span>
 <p class="font-body-md text-body-md text-on-surface text-balance" style="line-height:1.7;">대표사진은 예쁜 순서가 아니라, 고객이 매장을 이해하는 순서로 배치합니다.</p>
 <p class="font-body-md text-body-md text-on-surface-variant text-balance" style="line-height:1.7; margin-top:12px;">사진을 더 많이 올리는 것보다 첫 세 장이 같은 이야기를 하도록 정리하는 것이 먼저입니다.</p>
 <button data-action="goto-next-level" data-sc-cta type="button" class="w-full bg-surface-container-highest border border-outline-variant text-on-surface font-body-md text-body-md py-3 rounded hover:bg-surface-variant transition-colors flex justify-center items-center gap-2" style="margin-top:18px;">
 내 매장의 첫 세 장 확인하기 <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
 </button>
+</div>
 </div>
 </div>
 
@@ -1544,46 +1548,82 @@
   function setupSurfaceScrub(){
     var el=$("#surface-scrub"); if(!el) return;
     var seenView=false, firedBefore=false, firedAfter=false, firedNote=false, lastBucket=-1, ticking=false;
-    var reduce = RM;
+    var userControlled=false;        // 사용자가 한 번이라도 드래그/키조작하면 스크롤 자동이동 중단
+    var pos=100;                     // 시작: '지금'(before) 100%
+    var AUTO_STOP=50;                // 스크롤 자동은 절반(50%)에서 멈춤
 
-    function fireChange(bucket){
-      // bucket 0=지금(before) 우세, 1=절반 전환, 2=정리 후(after) 완성
+    function setPos(v){
+      pos = Math.max(0, Math.min(100, v));
+      el.style.setProperty("--pos", pos.toFixed(1) + "%");
+      el.setAttribute("aria-valuenow", Math.round(pos));
+      reportBucket();
+    }
+    function reportBucket(){
+      if(!seenView) return;
+      var bucket = pos > 66 ? 0 : (pos < 34 ? 2 : 1);   // 0=지금 우세,1=중간,2=정리후 우세
       if(bucket===lastBucket) return; lastBucket=bucket;
       var topic = bucket===0 ? "before" : (bucket===2 ? "after" : "mid");
       track("surface_demo_change", { slide_index:bucket, slide_topic:topic });
       if(bucket===0 && !firedBefore){ firedBefore=true; trackOnce("surface_before_view", { slide_index:0, slide_topic:"before" }); }
       if(bucket===2 && !firedAfter){ firedAfter=true; trackOnce("surface_after_view", { slide_index:2, slide_topic:"after" }); }
     }
+
+    /* ---- 드래그(수동): 포인터 위치 → pos ---- */
+    function posFromClientX(clientX){
+      var r = el.getBoundingClientRect();
+      var ratio = (clientX - r.left) / r.width;           // 0(왼쪽=정리후 끝) ~ 1(오른쪽=지금 끝)
+      return Math.max(0, Math.min(100, ratio * 100));
+    }
+    function startDrag(){ userControlled=true; el.classList.add("is-dragging"); }
+    function endDrag(){ el.classList.remove("is-dragging"); }
+
+    // 마우스
+    el.addEventListener("mousedown", function(e){ startDrag(); setPos(posFromClientX(e.clientX)); e.preventDefault();
+      function mv(ev){ setPos(posFromClientX(ev.clientX)); }
+      function up(){ endDrag(); document.removeEventListener("mousemove", mv); document.removeEventListener("mouseup", up); }
+      document.addEventListener("mousemove", mv); document.addEventListener("mouseup", up);
+    });
+    // 터치 (가로 드래그는 슬라이더, 세로는 스크롤 유지)
+    var tStartX=null, tStartY=null, tActive=false;
+    el.addEventListener("touchstart", function(e){ var t=e.touches[0]; tStartX=t.clientX; tStartY=t.clientY; tActive=false; }, {passive:true});
+    el.addEventListener("touchmove", function(e){
+      if(tStartX===null) return; var t=e.touches[0];
+      var dx=Math.abs(t.clientX-tStartX), dy=Math.abs(t.clientY-tStartY);
+      if(!tActive && dx>dy+4){ tActive=true; startDrag(); }
+      if(tActive){ setPos(posFromClientX(t.clientX)); e.preventDefault(); }   // 가로 드래그 중엔 세로스크롤 차단
+    }, {passive:false});
+    el.addEventListener("touchend", function(){ if(tActive){ endDrag(); } tStartX=null; tActive=false; }, {passive:true});
+
+    // 키보드 ←→
+    el.addEventListener("keydown", function(e){
+      if(e.key==="ArrowLeft"){ userControlled=true; setPos(pos-5); e.preventDefault(); }     // 정리후 쪽
+      else if(e.key==="ArrowRight"){ userControlled=true; setPos(pos+5); e.preventDefault(); } // 지금 쪽
+    });
+
+    /* ---- 스크롤(자동): 드래그 전까지만, 절반(50%)에서 정지 ---- */
     function update(){
       var vh = window.innerHeight || document.documentElement.clientHeight;
       var r = el.getBoundingClientRect();
-      // 이미지가 하단(0.85vh)에 들어오면 '지금'(pos 100%), 중앙 위(0.30vh)면 '정리 후'(pos 0%)
-      var p = (vh * 0.85 - r.top) / (vh * 0.55);
-      p = Math.max(0, Math.min(1, p));
-      var pos = (1 - p) * 100;
-      if(!reduce){ el.style.setProperty("--pos", pos.toFixed(1) + "%"); }
-      // 뷰 진입 1회
-      if(!seenView && r.top < vh && r.bottom > 0){ seenView=true; trackOnce("surface_demo_view", { slide_index:0, slide_topic:"before" }); }
-      // 진행 단계 이벤트
-      if(seenView){
-        if(p < 0.15) fireChange(0);
-        else if(p > 0.85) fireChange(2);
-        else fireChange(1);
-        // 노트(정적 블록)가 화면에 들어오면 note_view
-        if(!firedNote){
-          var note=$("[data-sc-cta]");
-          if(note){ var nr=note.getBoundingClientRect(); if(nr.top < vh*0.9){ firedNote=true; trackOnce("surface_note_view", { slide_index:2, slide_topic:"note" }); } }
-        }
+      if(!seenView && r.top < vh && r.bottom > 0){
+        seenView=true; trackOnce("surface_demo_view", { slide_index:0, slide_topic:"before" });
+        reportBucket();
+      }
+      if(!userControlled){
+        // 이미지가 하단(0.85vh)에 들어오면 0 → 중앙 위(0.45vh)면 1. 그 진행을 100→50%로만 매핑(절반에서 멈춤)
+        var t = (vh * 0.85 - r.top) / (vh * 0.40);
+        t = Math.max(0, Math.min(1, t));
+        setPos(100 - t * (100 - AUTO_STOP));   // 100% → 50%
+      }
+      if(seenView && !firedNote){
+        var note=$("[data-sc-cta]");
+        if(note){ var nr=note.getBoundingClientRect(); if(nr.top < vh*0.9){ firedNote=true; trackOnce("surface_note_view", { slide_index:2, slide_topic:"note" }); } }
       }
       ticking=false;
     }
     function onScroll(){ if(!ticking){ ticking=true; requestAnimationFrame(update); } }
-    if(reduce){
-      el.style.setProperty("--pos", "0%");   // 정리 후로 고정
-      seenView=true; trackOnce("surface_demo_view", { slide_index:0, slide_topic:"before" });
-    }
     window.addEventListener("scroll", onScroll, {passive:true});
     window.addEventListener("resize", onScroll, {passive:true});
+    setPos(100);   // 초기 '지금'
     update();
   }
 
