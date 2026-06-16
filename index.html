@@ -43,6 +43,23 @@
 </style>
 <style id="app">
   body{ background-color:#1A1612; color:#e6e1e0; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; word-break:keep-all; }
+  /* 모바일 가독성 — 한글 제목/본문 자간·행간 보정 */
+  .text-headline-xl{ line-height:1.18; letter-spacing:-0.015em; }
+  .text-headline-md{ line-height:1.35; letter-spacing:-0.01em; }
+  .text-body-lg{ line-height:1.6; letter-spacing:-0.003em; }
+  .text-body-md{ line-height:1.65; letter-spacing:0.001em; }
+  .text-label-sm{ line-height:1.5; }
+  h1, h2, h3{ word-break:keep-all; }
+  /* 고정 헤더/하단바에 가려지지 않도록 스크롤 시 여백 */
+  section[id]{ scroll-margin-top:80px; }
+  /* 좁은 화면 Hero 제목 축소 (48px 고정 → 반응형) */
+  @media (max-width:400px){
+    .text-headline-xl{ font-size:38px; }
+    #hero{ min-height:84vh; }
+  }
+  @media (max-width:340px){
+    .text-headline-xl{ font-size:34px; }
+  }
   .material-symbols-outlined{ font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; line-height:1; vertical-align:middle; }
   .grain-overlay{ position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:9999; opacity:.03;
     background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
@@ -150,25 +167,25 @@
 <div class="editorial-container pb-32">
 
 <!-- TopAppBar -->
-<header class="top-app-bar-fixed flex justify-between items-center px-margin-mobile py-4 bg-surface border-b border-outline-variant transition-opacity duration-300">
+<header class="top-app-bar-fixed flex justify-between items-center px-margin-mobile py-3 border-b border-outline-variant/60 transition-opacity duration-300" style="background:rgba(20,19,19,.82); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);">
 <div class="font-headline-md-mobile text-headline-md-mobile text-primary tracking-tight">WEPLACE PRIVATE 72</div>
 <div class="flex items-center gap-4 text-primary">
 <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">schedule</span>
 </div>
 </header>
 
-<main class="pt-[72px]">
+<main>
 
 <!-- ============ Section 01 · Private Invitation Hero ============ -->
-<section id="hero" class="relative h-[85vh] min-h-[600px] flex flex-col justify-end p-margin-mobile pb-stack-md bg-img hero-bg">
-<div class="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
+<section id="hero" class="relative flex flex-col justify-center px-margin-mobile bg-img hero-bg" style="min-height:88vh; padding-top:96px; padding-bottom:48px;">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/85 to-background/40"></div>
 <div class="relative z-10 flex flex-col gap-unit">
-<div id="hero-badge" class="inline-flex items-center w-fit px-3 py-1 bg-surface-container-low/80 backdrop-blur-sm border border-outline-variant rounded text-primary text-label-sm font-label-sm mb-4">
+<div id="hero-badge" class="inline-flex items-center w-fit px-3 py-1 bg-surface-container-low/80 backdrop-blur-sm border border-outline-variant rounded text-primary text-label-sm font-label-sm mb-5">
 <span class="material-symbols-outlined text-[16px] mr-1">lock</span> 카카오 메시지를 받은 대표님 전용
 </div>
-<h1 class="font-headline-xl text-headline-xl text-on-surface text-balance mb-3">대표님 매장은 이미 검색되고 있습니다.</h1>
+<h1 class="font-headline-xl text-headline-xl text-on-surface text-balance mb-4">대표님 매장은 이미 검색되고 있습니다.</h1>
 <p class="font-body-lg text-body-lg text-on-surface text-balance mb-2">문제는 고객이 어느 화면에서 멈추는가입니다.</p>
-<p class="font-body-md text-body-md text-on-surface-variant text-balance mb-6">손님이 매장을 이해하는 흐름을 1분 안에 먼저 확인해보세요.</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-balance mb-7">손님이 매장을 이해하는 흐름을 1분 안에 먼저 확인해보세요.</p>
 <button data-action="hero-proof" id="hero-proof" type="button" class="w-full text-left bg-surface-container-low/80 backdrop-blur-sm border border-outline-variant rounded px-4 py-3 mb-8">
 <div class="flex items-center justify-between mb-2">
 <span class="font-label-sm text-label-sm text-muted-gold uppercase tracking-widest">Actual Signal</span>
